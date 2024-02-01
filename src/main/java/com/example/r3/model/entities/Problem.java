@@ -17,11 +17,5 @@ import java.security.SecureRandom;
 public class Problem {
     @Id
     int id;
-    @Transient
-    @Autowired
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
-
-    @Column(nullable = true)
-    private String hashedPassword;
 
 }
