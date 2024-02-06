@@ -15,7 +15,12 @@ import java.util.List;
 @Entity
 public class Problem {
     @Id
-    int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    long id;
+    String statement;
+    String code;
+    List<Case> answer = new ArrayList<>();
+
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();

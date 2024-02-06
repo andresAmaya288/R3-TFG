@@ -22,6 +22,18 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public List<Problem> getProblemList() {
+        return problemList;
+    }
+
+    public void setProblemList(List<Problem> problemList) {
+        this.problemList = problemList;
+    }
+
     @Column(nullable = true)
     private String hashedPassword;
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
@@ -58,6 +70,20 @@ public class User {
         }
         this.roles = List.of(roles);
     }
+
+    public Problem addProblem(Problem problem){
+       Boolean foo = this.problemList.add(problem);
+       return foo?problem:null;
+    }
+
+    public boolean samePassword(User user){
+        return this.hashedPassword == user.hashedPassword;
+    }
+
+    public boolean samePassword(String password){
+        return this.hashedPassword.equals(passwordEncoder.encode(password));
+    }
+
     public List<String> getRoles() {
         return roles;
     }
