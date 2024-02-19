@@ -1,4 +1,4 @@
-/*package com.example.r3.security;
+package com.example.r3.security;
 import com.example.r3.model.repositories.RepositoryUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,13 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import java.security.SecureRandom;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfiguration {
+public class SecurityConfiguration extends WebSecurityConfigurationAdapter {
 
     @Autowired
     public RepositoryUserDetailsService userDetailsService;
@@ -37,10 +36,10 @@ public class SecurityConfiguration extends WebSecurityConfiguration {
     protected void configure(HttpSecurity http) throws Exception{
 
         // Public pages
-       http.authorizeHttpRequests().antMatcher();
+
+        http.authorizeRequests().anyRequest().permitAll();
 
     }
 
 
 }
-*/
