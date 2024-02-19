@@ -17,6 +17,8 @@ public class Problem {
     String statement;
     String code;
 
+    int difficulty;
+
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
     List<condition> answer = new ArrayList<>();
 
@@ -63,6 +65,13 @@ public class Problem {
         this.userList = userList;
     }
 
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
 
     public boolean isSolution(List<condition> solution){
         boolean sol = new HashSet<>(this.answer).containsAll(solution) && this.answer.size() == solution.size();
