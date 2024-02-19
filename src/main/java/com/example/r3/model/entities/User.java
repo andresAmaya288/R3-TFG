@@ -12,12 +12,16 @@ import java.util.List;
 
 @NoArgsConstructor
 @Entity
+@Table(name="`user`")
 public class User {
     @Id
     String username;
     @Transient
-    @Autowired
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
+    @Column(nullable = true)
+    private String hashedPassword;
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
+    private List<Problem> problemList  = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
@@ -34,10 +38,7 @@ public class User {
         this.problemList = problemList;
     }
 
-    @Column(nullable = true)
-    private String hashedPassword;
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
-    private List<Problem> problemList  = new ArrayList<>();
+
 
     public String getUsername() {
         return username;
@@ -63,8 +64,8 @@ public class User {
         this.hashedPassword = hashedPassword;
     }
 
-    public User(String userName, String password, String ... roles) {
-        this.username = userName;
+    public User(String username, String password, String ... roles) {
+        this.username = username;
         if (password != null) {
             this.hashedPassword = passwordEncoder.encode(password);
         }

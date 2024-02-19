@@ -2,11 +2,11 @@ package com.example.r3.model.entities;
 
 import java.util.Objects;
 
-public class RecursiveCase implements Case {
+public class RecursiveCondition extends condition {
     String downCode;
     String upCode;
 
-    public RecursiveCase(String downCode, String upCode) {
+    public RecursiveCondition(String downCode, String upCode) {
         this.downCode = downCode;
         this.upCode = upCode;
     }
@@ -15,7 +15,7 @@ public class RecursiveCase implements Case {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RecursiveCase that = (RecursiveCase) o;
+        RecursiveCondition that = (RecursiveCondition) o;
         return Objects.equals(downCode, that.downCode) && Objects.equals(upCode, that.upCode);
     }
 

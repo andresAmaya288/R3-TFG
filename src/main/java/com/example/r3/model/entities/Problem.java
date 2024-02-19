@@ -2,12 +2,9 @@ package com.example.r3.model.entities;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -19,7 +16,9 @@ public class Problem {
     long id;
     String statement;
     String code;
-    List<Case> answer = new ArrayList<>();
+
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
+    List<condition> answer = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();
@@ -48,11 +47,11 @@ public class Problem {
         this.code = code;
     }
 
-    public List<Case> getAnswer() {
+    public List<condition> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(List<Case> answer) {
+    public void setAnswer(List<condition> answer) {
         this.answer = answer;
     }
 
@@ -65,6 +64,9 @@ public class Problem {
     }
 
 
-
+    public boolean isSolution(List<condition> solution){
+        boolean sol = new HashSet<>(this.answer).containsAll(solution) && this.answer.size() == solution.size();
+        return sol;
+    }
 
 }

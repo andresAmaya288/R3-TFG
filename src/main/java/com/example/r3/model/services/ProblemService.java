@@ -15,8 +15,7 @@ public class ProblemService {
 
      @Autowired
     ProblemRepository problemRepository;
-     @Autowired
-    EntityManager entityManager;
+
 
     public Problem getProblem(long id){
 
