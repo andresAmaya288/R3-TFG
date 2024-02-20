@@ -1,6 +1,9 @@
 package com.example.r3.controller;
 
+import com.example.r3.model.entities.BaseCondition;
+import com.example.r3.model.entities.Condition;
 import com.example.r3.model.entities.Problem;
+import com.example.r3.model.entities.RecursiveCondition;
 import com.example.r3.model.services.DataService;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.concurrent.locks.Condition;
+
 
 @NoArgsConstructor
 @Controller
@@ -29,8 +32,11 @@ public class R3controller {
     @Autowired
     EntityManager entityManager;
 
+    static boolean init = false;
+
     @GetMapping("/")
     public String index (Model model, HttpServletRequest request){
+        this.load();
         model.addAttribute("problems",this.dataService.getProblemValues());
         return "index";
     }
@@ -44,13 +50,14 @@ public class R3controller {
     @PostMapping("/problem/{id}/solution")
     public String solution (Model model, HttpServletRequest request, @PathVariable String id, @RequestBody String conditions){
         Long idLong = Long.parseLong(id);
-        List <Condition> sol = this.parseConditionList(conditions);
+        List<Condition> sol = this.parseConditionList(conditions);
         Problem problem = this.dataService.getProblem(idLong);
         boolean bool = problem.isSolution(sol);
         model.addAttribute("problem",problem);
         model.addAttribute("bool",bool);
         return "problem";
     }
+
 
     //////////////////////////////////////////////////////////////////////////////
     private List<Condition> parseConditionList(String in){
@@ -68,5 +75,16 @@ public class R3controller {
         }
 
         return conditions;
+    }
+    private void load (){
+        if(!init) {
+            List<Condition> answer = new ArrayList<>();
+            answer.add(new RecursiveCondition("n - 1", " + n"));
+            answer.add(new BaseCondition("n == 1", " return 1"));
+            Problem recursiveSumatory = new Problem("Sumatorio recursivo", "Diseña una función sumatorioRecursivo(n) que calcule el valor del sumatorio de los primeros n números naturales. El parámetro n, entero positivo, representa hasta que número habrá que sumar.  ",
+                    "hello", 1, 200, answer);
+            this.dataService.addProblem(recursiveSumatory);
+            init = true;
+        }
     }
 }

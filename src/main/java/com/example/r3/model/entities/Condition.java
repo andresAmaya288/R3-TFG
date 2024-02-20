@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public abstract class cond {
+public abstract class Condition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;

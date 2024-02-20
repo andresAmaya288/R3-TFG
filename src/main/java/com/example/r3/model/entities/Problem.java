@@ -14,16 +14,28 @@ public class Problem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
+    String title;
     String statement;
     String code;
-
+    int points;
     int difficulty;
 
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
-    List<cond> answer = new ArrayList<>();
+    List<Condition> answer = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();
+
+    public Problem(String title, String statement, String code, int difficulty, int points, List<Condition> answer) {
+        this.statement = statement;
+        this.code = code;
+        this.difficulty = difficulty;
+        this.answer = answer;
+        this.difficulty = difficulty;
+        this.title = title;
+        this.points = points;
+    }
+
 
     public long getId() {
         return id;
@@ -49,11 +61,11 @@ public class Problem {
         this.code = code;
     }
 
-    public List<cond> getAnswer() {
+    public List<Condition> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(List<cond> answer) {
+    public void setAnswer(List<Condition> answer) {
         this.answer = answer;
     }
 
@@ -73,9 +85,24 @@ public class Problem {
         this.difficulty = difficulty;
     }
 
-    public boolean isSolution(List<java.util.concurrent.locks.Condition> solution){
+    public boolean isSolution(List<Condition> solution){
         boolean sol = new HashSet<>(this.answer).containsAll(solution) && this.answer.size() == solution.size();
         return sol;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }
