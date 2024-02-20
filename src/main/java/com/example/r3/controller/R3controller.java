@@ -54,7 +54,7 @@ public class R3controller {
 
     //////////////////////////////////////////////////////////////////////////////
     private List<Condition> parseConditionList(String in){
-        Collection <Condition> conditions = new ArrayList<>();
+        List <Condition> conditions = new ArrayList<>();
         StringTokenizer stringTokenizer = new StringTokenizer(in);
         String token = stringTokenizer.nextToken("[=&]");
         while (stringTokenizer.hasMoreTokens()){

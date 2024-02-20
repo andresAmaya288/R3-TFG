@@ -20,7 +20,7 @@ public class Problem {
     int difficulty;
 
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
-    List<condition> answer = new ArrayList<>();
+    List<cond> answer = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();
@@ -49,11 +49,11 @@ public class Problem {
         this.code = code;
     }
 
-    public List<condition> getAnswer() {
+    public List<cond> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(List<condition> answer) {
+    public void setAnswer(List<cond> answer) {
         this.answer = answer;
     }
 
@@ -73,7 +73,7 @@ public class Problem {
         this.difficulty = difficulty;
     }
 
-    public boolean isSolution(List<condition> solution){
+    public boolean isSolution(List<java.util.concurrent.locks.Condition> solution){
         boolean sol = new HashSet<>(this.answer).containsAll(solution) && this.answer.size() == solution.size();
         return sol;
     }

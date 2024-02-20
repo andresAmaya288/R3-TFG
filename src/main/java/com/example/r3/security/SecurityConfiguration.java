@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
@@ -15,7 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurationAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public RepositoryUserDetailsService userDetailsService;
@@ -31,15 +32,18 @@ public class SecurityConfiguration extends WebSecurityConfigurationAdapter {
     }
 
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception{
 
         // Public pages
-
-        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests().antMatchers("/").permitAll();
+        http.authorizeRequests().antMatchers("/index.html").permitAll();
+        http.authorizeRequests().antMatchers("/css/styles.css").permitAll();
+        http.authorizeRequests().antMatchers("/js/scripts.js").permitAll();
+        http.authorizeRequests().antMatchers("/assets/img/*").permitAll();
 
     }
+
 
 
 }
