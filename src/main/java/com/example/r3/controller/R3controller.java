@@ -47,11 +47,12 @@ public class R3controller {
     @GetMapping("/problem/{id}/solution")
     public String solution (Model model, HttpServletRequest request, @PathVariable String id, @RequestParam String condition, @RequestParam String operation, @RequestParam String upCode, @RequestParam String downCode){
         Long idLong = Long.parseLong(id);
-        List<Condition> sol = new ArrayList<>() ;  //this.parseConditionList(conditions);
-        sol.add(new BaseCondition(condition,operation));
-        sol.add(new RecursiveCondition(downCode,upCode));
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+        recursiveAnswer.add(new RecursiveCondition(downCode, upCode));
+        baseAnswer.add(new BaseCondition(condition, operation));
         Problem problem = this.dataService.getProblem(idLong);
-        boolean bool = problem.isSolution(sol);
+        boolean bool = problem.isSolution(baseAnswer,recursiveAnswer);
         model.addAttribute("problem",problem);
         model.addAttribute("bool",bool);
         return "problem";
@@ -77,11 +78,12 @@ public class R3controller {
     }
     private void load (){
         if(!init) {
-            List<Condition> answer = new ArrayList<>();
-            answer.add(new RecursiveCondition("n - 1", " + n"));
-            answer.add(new BaseCondition("n == 1", " return 1"));
+            List<BaseCondition> baseAnswer = new ArrayList<>();
+            List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+            recursiveAnswer.add(new RecursiveCondition("n - 1", "+ n"));
+            baseAnswer.add(new BaseCondition("n == 1", "return 1"));
             Problem recursiveSumatory = new Problem("Sumatorio recursivo", "Diseña una función sumatorioRecursivo(n) que calcule el valor del sumatorio de los primeros n números naturales. El parámetro n, entero positivo, representa hasta que número habrá que sumar.  ",
-                    "hello", 1, 200, answer);
+                    "hello", 1, 200, baseAnswer, recursiveAnswer);
             this.dataService.addProblem(recursiveSumatory);
             init = true;
         }

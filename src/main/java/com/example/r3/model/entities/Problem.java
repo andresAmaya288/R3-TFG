@@ -21,16 +21,19 @@ public class Problem {
     int difficulty;
 
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
-    List<Condition> answer = new ArrayList<>();
+    List<BaseCondition> baseAnswer = new ArrayList<>();
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
+    List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();
 
-    public Problem(String title, String statement, String code, int difficulty, int points, List<Condition> answer) {
+    public Problem(String title, String statement, String code, int difficulty, int points, List<BaseCondition> baseAnswer, List<RecursiveCondition> recursiveAnswer) {
         this.statement = statement;
         this.code = code;
         this.difficulty = difficulty;
-        this.answer = answer;
+        this.baseAnswer = baseAnswer;
+        this.recursiveAnswer = recursiveAnswer;
         this.difficulty = difficulty;
         this.title = title;
         this.points = points;
@@ -61,12 +64,20 @@ public class Problem {
         this.code = code;
     }
 
-    public List<Condition> getAnswer() {
-        return answer;
+    public List<BaseCondition> getBaseAnswer() {
+        return baseAnswer;
     }
 
-    public void setAnswer(List<Condition> answer) {
-        this.answer = answer;
+    public void setBaseAnswer(List<BaseCondition> baseAnswer) {
+        this.baseAnswer = baseAnswer;
+    }
+
+    public List<RecursiveCondition> getRecursiveAnswer() {
+        return recursiveAnswer;
+    }
+
+    public void setRecursiveAnswer(List<RecursiveCondition> recursiveAnswer) {
+        this.recursiveAnswer = recursiveAnswer;
     }
 
     public List<User> getUserList() {
@@ -85,8 +96,15 @@ public class Problem {
         this.difficulty = difficulty;
     }
 
-    public boolean isSolution(List<Condition> solution){
-        boolean sol = new HashSet<>(this.answer).containsAll(solution) && this.answer.size() == solution.size();
+    public boolean isSolution(List<BaseCondition> baseAnswer,List<RecursiveCondition> recursiveAnswer ){
+        Boolean sol = true;
+        for (BaseCondition condition : baseAnswer){
+            sol &= this.baseAnswer.contains(condition);
+        }
+        for (RecursiveCondition condition : recursiveAnswer){
+            sol &= this.recursiveAnswer.contains(condition);
+        }
+
         return sol;
     }
 

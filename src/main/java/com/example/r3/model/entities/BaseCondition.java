@@ -1,7 +1,12 @@
 package com.example.r3.model.entities;
 
+import jakarta.persistence.Entity;
+import lombok.NoArgsConstructor;
+
 import java.util.Objects;
 
+@Entity
+@NoArgsConstructor
 public class BaseCondition extends Condition {
     String condition;
     String operation;

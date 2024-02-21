@@ -7,11 +7,11 @@
         <meta name="author" content="" />
         <title>Shop Item - Start Bootstrap Template</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/../img/favicon.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../css/styles.css" rel="stylesheet" />
+        <link href="/../css/styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Navigation-->
@@ -35,7 +35,7 @@
                     </ul>
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
-                            <i clas"bi-cart-fill me-1"></i>
+                            <i class="bi-cart-fill me-1"></i>
                             Cart
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
@@ -50,7 +50,6 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-498</div>
                         <h1 class="display-5 fw-bolder">{{title}}</h1>
                         <div class="fs-5 mb-5">
                             <span>{{points}} pts</span>
@@ -64,38 +63,39 @@
                         </div>
 
                         <p class="lead">{{statement}}</p>
-                        <div class="d-flex">
-                            <form class="d-flex" action="/problem/{{id}}/solution">
-                                <h2 class="display-5 fw-bolder">Caso Base</h2>
+                        <div>
+                            <form action="/problem/{{id}}/solution">
+                                <h4 class="form-control-plaintext">Caso Base</h4>
                                 <div>
-                                    <label for="condition">Condición:</label>
+                                    <label class="form-label"  for="condition">Condición:</label>
                                     <select id="condition" name="condition">
+                                        <option value="...">...</option>
                                         <option value="n == 1">n == 1</option>
                                         <option value="n != 1">n != 1</option>
                                         <option value="n > 1">n > 1</option>
                                     </select>
-                                </div>
-                                <div>
-                                    <label for="operation">Operación:</label>
+
+                                    <label class="form-label"  for="operation">Operación:</label>
                                     <select id="operation" name="operation">
+                                        <option value="...">...</option>
                                         <option value="return 1">return 1</option>
                                         <option value="return n * 2">return n*2</option>
                                         <option value="return n / 2">return n/2</option>
                                     </select>
                                 </div>
 
-                                <h2 class="display-5 fw-bolder">Caso Recursivo</h2>
+                                <h4 class="form-control-plaintext">Caso Recursivo</h4>
                                 <div>
-                                    <label for="downCode">Operación (Abajo):</label>
+                                    <label class="form-label"  for="downCode">Operación (Abajo):</label>
                                     <select id="downCode" name="downCode">
+                                        <option value="...">...</option>
                                         <option value="n + 1">n + 1</option>
                                         <option value="n - 1">n - 1</option>
                                         <option value="<n / 2>">n / 2</option>
                                     </select>
-                                </div>
-                                <div>
-                                    <label for="upCode">Operación (Arriba):</label>
+                                    <label class="form-label" for="upCode">Operación (Arriba):</label>
                                     <select id="upCode" name="upCode">
+                                        <option value="...">...</option>
                                         <option value="+ n">+ n</option>
                                         <option value="- n">- n</option>
                                         <option value="+ 1">+ 1</option>
@@ -118,6 +118,6 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
+        <script src="/../js/scripts.js"></script>
     </body>
 </html>
