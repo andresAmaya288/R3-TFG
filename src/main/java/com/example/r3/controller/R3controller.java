@@ -11,10 +11,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,10 +44,12 @@ public class R3controller {
         return "problem";
     }
 
-    @PostMapping("/problem/{id}/solution")
-    public String solution (Model model, HttpServletRequest request, @PathVariable String id, @RequestBody String conditions){
+    @GetMapping("/problem/{id}/solution")
+    public String solution (Model model, HttpServletRequest request, @PathVariable String id, @RequestParam String condition, @RequestParam String operation, @RequestParam String upCode, @RequestParam String downCode){
         Long idLong = Long.parseLong(id);
-        List<Condition> sol = this.parseConditionList(conditions);
+        List<Condition> sol = new ArrayList<>() ;  //this.parseConditionList(conditions);
+        sol.add(new BaseCondition(condition,operation));
+        sol.add(new RecursiveCondition(downCode,upCode));
         Problem problem = this.dataService.getProblem(idLong);
         boolean bool = problem.isSolution(sol);
         model.addAttribute("problem",problem);
