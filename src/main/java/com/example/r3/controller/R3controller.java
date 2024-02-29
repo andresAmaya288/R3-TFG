@@ -55,7 +55,7 @@ public class R3controller {
         boolean bool = problem.isSolution(baseAnswer,recursiveAnswer);
         model.addAttribute("problem",problem);
         model.addAttribute("bool",bool);
-        return "problem";
+        return "solution";
     }
 
 
