@@ -80,10 +80,42 @@ public class R3controller {
         if(!init) {
             List<BaseCondition> baseAnswer = new ArrayList<>();
             List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
-            recursiveAnswer.add(new RecursiveCondition("n - 1", "+ n"));
-            baseAnswer.add(new BaseCondition("n == 1", "return 1"));
-            Problem recursiveSumatory = new Problem("Sumatorio recursivo", "Diseña una función sumatorioRecursivo(n) que calcule el valor del sumatorio de los primeros n números naturales. El parámetro n, entero positivo, representa hasta que número habrá que sumar.  ",
-                    "hello", 1, 200, baseAnswer, recursiveAnswer);
+            RecursiveCondition recSol = new RecursiveCondition("n - 1", "+ n");
+            BaseCondition baseSol = new BaseCondition("n == 1", "return 1");
+            recursiveAnswer.add(recSol);
+            baseAnswer.add(baseSol);
+
+            List<String> operations = new ArrayList<>();
+            List<String> conditions = new ArrayList<>();
+            List<String> upCodes = new ArrayList<>();
+            List<String> downCodes = new ArrayList<>();
+
+            operations.add("return n / 2");
+            operations.add("return 1");
+            operations.add("return n * 2");
+
+            conditions.add("n == 1");
+            conditions.add("n > 1");
+            conditions.add("n != 1");
+
+            upCodes.add("+ 1");
+            upCodes.add("- n");
+            upCodes.add("+ n");
+
+            downCodes.add("n + 1");
+            downCodes.add("n / 2");
+            downCodes.add("n - 1");
+
+
+            String title = "Sumatorio recursivo";
+            String statement = "Diseña una función sumatorioRecursivo(n) que calcule el valor del sumatorio de los primeros n números naturales. El parámetro n, entero positivo, representa hasta que número habrá que sumar.  ";
+            String function = "sumatorioRecursivo(n)";
+            int points = 200;
+            int difficulty = 1;
+
+
+            Problem recursiveSumatory = new Problem(title,statement,
+                    function, difficulty,points,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
             this.dataService.addProblem(recursiveSumatory);
             init = true;
         }

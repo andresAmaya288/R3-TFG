@@ -2,6 +2,7 @@ package com.example.r3.model.entities;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,8 +18,18 @@ public class Problem {
     String title;
     String statement;
     String code;
+    String function;
     int points;
     int difficulty;
+
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    List<String> operations = new ArrayList<>();
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    List<String> conditions = new ArrayList<>();
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    List<String> upCodes = new ArrayList<>();
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    List<String> downCodes = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
     List<BaseCondition> baseAnswer = new ArrayList<>();
@@ -28,17 +39,19 @@ public class Problem {
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();
 
-    public Problem(String title, String statement, String code, int difficulty, int points, List<BaseCondition> baseAnswer, List<RecursiveCondition> recursiveAnswer) {
+    public Problem(String title, String statement, String function, int points, int difficulty, List<String> operations, List<String> conditions, List<String> upCodes, List<String> downCodes, List<BaseCondition> baseAnswer, List<RecursiveCondition> recursiveAnswer) {
+        this.title = title;
         this.statement = statement;
-        this.code = code;
+        this.function = function;
+        this.points = points;
         this.difficulty = difficulty;
+        this.operations = operations;
+        this.conditions = conditions;
+        this.upCodes = upCodes;
+        this.downCodes = downCodes;
         this.baseAnswer = baseAnswer;
         this.recursiveAnswer = recursiveAnswer;
-        this.difficulty = difficulty;
-        this.title = title;
-        this.points = points;
     }
-
 
     public long getId() {
         return id;
@@ -122,5 +135,45 @@ public class Problem {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
+    }
+
+    public List<String> getOperations() {
+        return operations;
+    }
+
+    public void setOperations(List<String> operations) {
+        this.operations = operations;
+    }
+
+    public List<String> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<String> conditions) {
+        this.conditions = conditions;
+    }
+
+    public List<String> getUpCodes() {
+        return upCodes;
+    }
+
+    public void setUpCodes(List<String> upCodes) {
+        this.upCodes = upCodes;
+    }
+
+    public List<String> getDownCodes() {
+        return downCodes;
+    }
+
+    public void setDownCodes(List<String> downCodes) {
+        this.downCodes = downCodes;
     }
 }
