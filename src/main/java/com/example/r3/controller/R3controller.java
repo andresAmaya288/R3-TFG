@@ -115,7 +115,7 @@ public class R3controller {
 
 
             Problem recursiveSumatory = new Problem(title,statement,
-                    function, difficulty,points,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
+                    function, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
             this.dataService.addProblem(recursiveSumatory);
             init = true;
         }

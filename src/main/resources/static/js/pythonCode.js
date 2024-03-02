@@ -1,35 +1,24 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Obtener los elementos del formulario
-    const conditionSelect = document.getElementById("condition");
-    const operationSelect = document.getElementById("operation");
-    const downCodeSelect = document.getElementById("downCode");
-    const upCodeSelect = document.getElementById("upCode");
-    const codeBlock = document.querySelector(".language-python code");
+// Definir la función para manejar el cambio
+function handleChange() {
+    // Obtener el valor del input
+    const condition = document.getElementById("condition").value;
+    const operation = document.getElementById("operation").value;
+    const downCode = document.getElementById("downCode").value;
+    const upCode = document.getElementById("upCode").value;
+    const pythonCode = document.getElementById("pythonCode");
 
-    // Función para actualizar el código en Python
-    function updatePythonCode() {
-        const conditionValue = conditionSelect.value;
-        const operationValue = operationSelect.value;
-        const downCodeValue = downCodeSelect.value;
-        const upCodeValue = upCodeSelect.value;
-
-        const pythonCode = `
+    pythonCode.innerHTML=`
 def sumatorio_recursivo(n):
-    if ${conditionValue}:
-        return ${operationValue}
+    if ${condition}:
+        return ${operation}
     else:
-        return sumatorio_recursivo(${downCodeValue}) + ${upCodeValue}
+        return sumatorio_recursivo(${downCode}) ${upCode}
         `;
+}
 
-        codeBlock.textContent = pythonCode;
-    }
-
-    // Evento para actualizar el código en Python cuando se cambian las selecciones del formulario
-    conditionSelect.addEventListener("change", updatePythonCode);
-    operationSelect.addEventListener("change", updatePythonCode);
-    downCodeSelect.addEventListener("change", updatePythonCode);
-    upCodeSelect.addEventListener("change", updatePythonCode);
-
-    // Llamar a la función una vez al cargar la página para inicializar el código en Python
-    updatePythonCode();
-});
+// Agregar un listener de evento change al input
+document.getElementById("condition").addEventListener("change", handleChange);
+document.getElementById("operation").addEventListener("change", handleChange);
+document.getElementById("downCode").addEventListener("change", handleChange);
+document.getElementById("upCode").addEventListener("change", handleChange);
+handleChange()
