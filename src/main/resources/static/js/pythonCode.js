@@ -5,15 +5,11 @@ function handleChange() {
     const operation = document.getElementById("operation").value;
     const downCode = document.getElementById("downCode").value;
     const upCode = document.getElementById("upCode").value;
-    const pythonCode = document.getElementById("pythonCode");
 
-    pythonCode.innerHTML=`
-def sumatorio_recursivo(n):
-    if ${condition}:
-        return ${operation}
-    else:
-        return sumatorio_recursivo(${downCode}) ${upCode}
-        `;
+    document.getElementById("condPy").innerText = condition;
+    document.getElementById("opPy").innerText = operation;
+    document.getElementById("downPy").innerText = downCode;
+    document.getElementById("upPy").innerText = upCode;
 }
 
 // Agregar un listener de evento change al input

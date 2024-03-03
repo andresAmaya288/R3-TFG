@@ -10,10 +10,17 @@ import java.util.Objects;
 public class RecursiveCondition extends Condition {
     String downCode;
     String upCode;
+    String condition;
 
     public RecursiveCondition(String downCode, String upCode) {
         this.downCode = downCode;
         this.upCode = upCode;
+    }
+
+    public RecursiveCondition(String downCode, String upCode, String condition) {
+        this.downCode = downCode;
+        this.upCode = upCode;
+        this.condition = condition;
     }
 
     @Override
@@ -21,11 +28,11 @@ public class RecursiveCondition extends Condition {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RecursiveCondition that = (RecursiveCondition) o;
-        return Objects.equals(downCode, that.downCode) && Objects.equals(upCode, that.upCode);
+        return Objects.equals(downCode, that.downCode) && Objects.equals(upCode, that.upCode) && Objects.equals(condition, that.condition);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(downCode, upCode);
+        return Objects.hash(downCode, upCode, condition);
     }
 }

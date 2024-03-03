@@ -19,6 +19,7 @@ public class Problem {
     String statement;
     String code;
     String function;
+    String args;
     int points;
     int difficulty;
 
@@ -36,13 +37,15 @@ public class Problem {
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
     List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
 
+    /*
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();
-
-    public Problem(String title, String statement, String function, int points, int difficulty, List<String> operations, List<String> conditions, List<String> upCodes, List<String> downCodes, List<BaseCondition> baseAnswer, List<RecursiveCondition> recursiveAnswer) {
+    */
+    public Problem(String title, String statement, String function, String args, int points, int difficulty, List<String> operations, List<String> conditions, List<String> upCodes, List<String> downCodes, List<BaseCondition> baseAnswer, List<RecursiveCondition> recursiveAnswer) {
         this.title = title;
         this.statement = statement;
         this.function = function;
+        this.args = args;
         this.points = points;
         this.difficulty = difficulty;
         this.operations = operations;
@@ -93,6 +96,7 @@ public class Problem {
         this.recursiveAnswer = recursiveAnswer;
     }
 
+    /*
     public List<User> getUserList() {
         return userList;
     }
@@ -100,7 +104,7 @@ public class Problem {
     public void setUserList(List<User> userList) {
         this.userList = userList;
     }
-
+    */
     public int getDifficulty() {
         return difficulty;
     }
@@ -175,5 +179,13 @@ public class Problem {
 
     public void setDownCodes(List<String> downCodes) {
         this.downCodes = downCodes;
+    }
+
+    public String getArgs() {
+        return args;
+    }
+
+    public void setArgs(String args) {
+        this.args = args;
     }
 }

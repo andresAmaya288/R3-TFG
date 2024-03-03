@@ -44,19 +44,7 @@ public class R3controller {
         return "problem";
     }
 
-    @GetMapping("/problem/{id}/solution")
-    public String solution (Model model, HttpServletRequest request, @PathVariable String id, @RequestParam String condition, @RequestParam String operation, @RequestParam String upCode, @RequestParam String downCode){
-        Long idLong = Long.parseLong(id);
-        List<BaseCondition> baseAnswer = new ArrayList<>();
-        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
-        recursiveAnswer.add(new RecursiveCondition(downCode, upCode));
-        baseAnswer.add(new BaseCondition(condition, operation));
-        Problem problem = this.dataService.getProblem(idLong);
-        boolean bool = problem.isSolution(baseAnswer,recursiveAnswer);
-        model.addAttribute("problem",problem);
-        model.addAttribute("bool",bool);
-        return "solution";
-    }
+
 
 
     //////////////////////////////////////////////////////////////////////////////
@@ -109,13 +97,14 @@ public class R3controller {
 
             String title = "Sumatorio recursivo";
             String statement = "Diseña una función sumatorioRecursivo(n) que calcule el valor del sumatorio de los primeros n números naturales. El parámetro n, entero positivo, representa hasta que número habrá que sumar.  ";
-            String function = "sumatorioRecursivo(n)";
+            String function = "sumatorio_Recursivo";
+            String args = "n";
             int points = 200;
             int difficulty = 1;
 
 
             Problem recursiveSumatory = new Problem(title,statement,
-                    function, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
+                    function,args, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
             this.dataService.addProblem(recursiveSumatory);
             init = true;
         }

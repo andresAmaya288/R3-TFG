@@ -1,7 +1,6 @@
 package com.example.r3.model.services;
 
 import com.example.r3.model.entities.Problem;
-import com.example.r3.model.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -13,9 +12,10 @@ import java.util.List;
 public class DataService {
     @Autowired
     ProblemService problemService;
+    /*
     @Autowired
     UserService userService;
-
+    */
     public Problem getProblem(long id) {
         return this.problemService.getProblem(id);
     }

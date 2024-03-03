@@ -1,4 +1,4 @@
-package com.example.r3.security;
+/*package com.example.r3.security;
 import com.example.r3.model.repositories.RepositoryUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,3 +42,4 @@ public class SecurityConfiguration {
 
 
 }
+*/

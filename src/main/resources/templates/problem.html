@@ -51,17 +51,15 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6">
                         <footer class="py-5 bg-dark">
-                        <pre>
-                            <code class="laguage-python">
-                                <div id="pythonCode">
-def sumatorio_recursivo(n):
-    if Condition:
-        return Operation
+                                <div id="pythonCode" class="m-0 text-left text-white">
+                                        <pre>
+def {{function}}({{args}}):
+    if <a id="condPy">Condition</a>:
+        return <a id="opPy">Operation</a>
     else:
-        return sumatorio_recursivo(Operation_down) + Operation_up
+        return {{function}}(<a id="downPy">Operation_down</a>) <a id="upPy">Operation_up</a>
+                                        </pre>
                                 </div>
-                            </code>
-                        </pre>
                         </footer>
                     </div>
                     <div class="col-md-6">
@@ -79,7 +77,8 @@ def sumatorio_recursivo(n):
 
                         <p class="lead">{{statement}}</p>
                         <div>
-                            <form action="/problem/{{id}}/solution">
+                            <form id="proForm" action="/problem/{{id}}/solution">
+                                <input type="hidden" id="proId" value="{{id}}">
                                 <h4 class="form-control-plaintext">Caso Base</h4>
                                 <div class="card">
                                     <label class="form-label"  for="condition">Condición:</label>
@@ -136,6 +135,7 @@ def sumatorio_recursivo(n):
         <!-- Core theme JS-->
         <script src="/../js/scripts.js"></script>
         <script src="/../js/pythonCode.js"></script>
+        <script src="/../js/sendForm.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
 
 
