@@ -99,12 +99,13 @@ public class R3controller {
             String statement = "Diseña una función sumatorioRecursivo(n) que calcule el valor del sumatorio de los primeros n números naturales. El parámetro n, entero positivo, representa hasta que número habrá que sumar.  ";
             String function = "sumatorio_Recursivo";
             String args = "n";
+            String url = "/../img/Sumatorio.png";
             int points = 200;
             int difficulty = 1;
 
 
             Problem recursiveSumatory = new Problem(title,statement,
-                    function,args, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
+                    function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
             this.dataService.addProblem(recursiveSumatory);
             init = true;
         }

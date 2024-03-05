@@ -2,10 +2,8 @@ package com.example.r3.model.entities;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 
@@ -20,8 +18,12 @@ public class Problem {
     String code;
     String function;
     String args;
+
+    String urlImg;
     int points;
     int difficulty;
+
+    char[] emptyStars;
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     List<String> operations = new ArrayList<>();
@@ -41,11 +43,12 @@ public class Problem {
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();
     */
-    public Problem(String title, String statement, String function, String args, int points, int difficulty, List<String> operations, List<String> conditions, List<String> upCodes, List<String> downCodes, List<BaseCondition> baseAnswer, List<RecursiveCondition> recursiveAnswer) {
+    public Problem(String title, String statement, String function, String args, String urlImg, int points, int difficulty, List<String> operations, List<String> conditions, List<String> upCodes, List<String> downCodes, List<BaseCondition> baseAnswer, List<RecursiveCondition> recursiveAnswer) {
         this.title = title;
         this.statement = statement;
         this.function = function;
         this.args = args;
+        this.urlImg = urlImg;
         this.points = points;
         this.difficulty = difficulty;
         this.operations = operations;
@@ -54,6 +57,7 @@ public class Problem {
         this.downCodes = downCodes;
         this.baseAnswer = baseAnswer;
         this.recursiveAnswer = recursiveAnswer;
+        this.emptyStars = new char [5 - difficulty];
     }
 
     public long getId() {
@@ -149,6 +153,14 @@ public class Problem {
         this.function = function;
     }
 
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
+    }
+
     public List<String> getOperations() {
         return operations;
     }
@@ -187,5 +199,13 @@ public class Problem {
 
     public void setArgs(String args) {
         this.args = args;
+    }
+
+    public char[] getEmptyStars() {
+        return emptyStars;
+    }
+
+    public void setEmptyStars(char[] emptyStars) {
+        this.emptyStars = emptyStars;
     }
 }

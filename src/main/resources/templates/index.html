@@ -58,7 +58,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="/../img/Sumatorio.png" alt="..." />
+                            <img class="card-img-top" src="{{urlImg}}" alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -66,11 +66,12 @@
                                     <h5 class="fw-bolder">{{title}}</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
+                                        {{#difficulty}}
                                         <div class="bi-star-fill"></div>
+                                        {{/difficulty}}
+                                        {{#emptyStars}}
                                         <div class="bi-star"></div>
-                                        <div class="bi-star"></div>
-                                        <div class="bi-star"></div>
-                                        <div class="bi-star"></div>
+                                        {{/emptyStars}}
                                     </div>
                                     <!-- Product price-->
                                     {{points}}pts

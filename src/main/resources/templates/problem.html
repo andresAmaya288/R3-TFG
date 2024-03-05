@@ -67,11 +67,12 @@ def {{function}}({{args}}):
                         <div class="fs-5 mb-5">
                             <span>{{points}} pts</span>
                             <div class="d-flex justify-content-left small text-warning mb-2">
+                                {{#difficulty}}
                                 <div class="bi-star-fill"></div>
+                                {{/difficulty}}
+                                {{#emptyStars}}
                                 <div class="bi-star"></div>
-                                <div class="bi-star"></div>
-                                <div class="bi-star"></div>
-                                <div class="bi-star"></div>
+                                {{/emptyStars}}
                             </div>
                         </div>
 
