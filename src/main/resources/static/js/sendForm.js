@@ -31,10 +31,23 @@ function submitForm() {
             // Check if the request was successful
             if (response.ok) {
                 // Process the response if needed
-                console.log('Form submitted successfully.');
+                return response.json();
             } else {
                 // Handle request errors
-                console.error('Error submitting form. Response status:', response.status);
+                throw new Error('Error submitting form. Response status: ' + response.status);
+            }
+        })
+        .then(function(data) {
+            // Print the response body
+            console.log('Response body:', data);
+            // Print true or false based on the response
+            console.log('Response is:', data === true ? 'true' : 'false');
+
+            element = document.getElementById("solutionFeedback");
+            if(data === true){
+                element.innerHTML= '<a style="font-weight: bold; color: green;">Enhorabuena!!</a> Has resuelto el problema';
+            }else {
+                element.innerHTML= '<a style="font-weight: bold; color: red;">X</a> Ups, parece que has fallado el problema, puedes volver a intentarlo';
             }
         })
         .catch(function(error) {
