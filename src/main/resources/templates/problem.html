@@ -81,7 +81,7 @@ def {{function}}({{args}}):
                             <form id="proForm" action="/problem/{{id}}/solution">
                                 <input type="hidden" id="proId" value="{{id}}">
                                 <h4 class="form-control-plaintext">Caso Base</h4>
-                                <div class="card">
+                                <div class="card" id="baseCase">
                                     <label class="form-label"  for="condition">Condición:</label>
                                     <select class="form-select" id="condition" name="condition">
                                         <option value="...">...</option>
@@ -99,9 +99,10 @@ def {{function}}({{args}}):
                                         {{/operations}}
                                     </select>
                                 </div>
+                                <button class="btn btn-outline-dark" type="button" onclick='duplicate("baseCase")'>Agregar Caso Base</button>
 
                                 <h4 class="form-control-plaintext">Caso Recursivo</h4>
-                                <div class="card">
+                                <div class="card" id="recursiveCase">
                                     <label class="form-label"  for="downCode">Operación (Abajo):</label>
                                     <select class="form-select" id="downCode" name="downCode">
                                         <option value="...">...</option>
@@ -117,6 +118,7 @@ def {{function}}({{args}}):
                                         {{/upCodes}}
                                     </select>
                                 </div>
+                                <button class="btn btn-outline-dark" type="button" onclick='duplicate("recursiveCase")'>Agregar Caso Recursivo</button>
 
                                 <button class="btn btn-outline-dark" type="submit">Resolver</button>
                             </form>
@@ -138,6 +140,7 @@ def {{function}}({{args}}):
         <script src="/../js/scripts.js"></script>
         <script src="/../js/pythonCode.js"></script>
         <script src="/../js/sendForm.js"></script>
+        <script src="/../js/duplicateForms.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
 
 
