@@ -99,10 +99,18 @@ def {{function}}({{args}}):
                                         {{/operations}}
                                     </select>
                                 </div>
-                                <button class="btn btn-outline-dark" type="button" onclick='duplicate("baseCase")'>Agregar Caso Base</button>
+                                <button class="btn btn-outline-dark" type="button" onclick='duplicateBaseCase()'>Agregar Caso Base</button>
+                                <button class="btn btn-outline-dark" type="button" onclick='eliminateBaseCase()'>Eliminar Caso Base</button>
 
                                 <h4 class="form-control-plaintext">Caso Recursivo</h4>
                                 <div class="card" id="recursiveCase">
+                                    <label type="hidden" id="conditionRecLabel" class="form-label"  for="conditionRec" hidden>Recursive Condition</label>
+                                    <select type="hidden" class="form-select" id="conditionRec" name="condition" hidden>
+                                        <option value="...">...</option>
+                                        {{#conditions}}
+                                        <option value="{{.}}">{{.}}</option>
+                                        {{/conditions}}
+                                    </select>
                                     <label class="form-label"  for="downCode">Operación (Abajo):</label>
                                     <select class="form-select" id="downCode" name="downCode">
                                         <option value="...">...</option>
@@ -118,8 +126,10 @@ def {{function}}({{args}}):
                                         {{/upCodes}}
                                     </select>
                                 </div>
-                                <button class="btn btn-outline-dark" type="button" onclick='duplicate("recursiveCase")'>Agregar Caso Recursivo</button>
-
+                                <div>
+                                    <button class="btn btn-outline-dark" type="button" onclick='duplicateRecursiveCase()'>Agregar Caso Recursivo</button>
+                                    <button class="btn btn-outline-dark" type="button" onclick='eliminateRecursiveCase()'>Eliminar Caso Recursivo</button>
+                                </div>
                                 <button class="btn btn-outline-dark" type="submit">Resolver</button>
                             </form>
                             <div id="solutionFeedback"></div>
@@ -142,7 +152,6 @@ def {{function}}({{args}}):
         <script src="/../js/sendForm.js"></script>
         <script src="/../js/duplicateForms.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-
 
     </body>
 </html>
