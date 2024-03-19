@@ -54,18 +54,18 @@
                                 <div id="pythonCode" class="m-0 text-left text-white">
                                         <pre>
 def {{function}}({{args}}):
-    if <a id="condPy">Condition</a>:
-        return <a id="opPy">Operation</a>
+    if <a id="conditionPy">Condition</a>:
+        return <a id="operationPy">Operation</a>
 <div id="addBaseCase" style="display: none;">
-    elif <a id="condPyI">Condition</a>:
-	    return <a id="opPyI">Operation</a>
+    elif <a id="conditionPyI">Condition</a>:
+	    return <a id="operationPyI">Operation</a>
 </div>
 <div id="addRecursiveCase" style="display: none;">
-    elif <a id="condRecPyI">ConditionRec</a>
-	    return {{function}}(<a id="downPyI">Operation_downI</a>) <a id="upPyI">Operation_upI</a>
+    elif <a id="recConditionPyI">recConditionI</a>
+	    return {{function}}(<a id="downCodePyI">Operation_downI</a>) <a id="upCodePyI">Operation_upI</a>
 </div>
     else:
-        return {{function}}(<a id="downPy">Operation_down</a>) <a id="upPy">Operation_up</a>
+        return {{function}}(<a id="downCodePy">Operation_down</a>) <a id="upCodePy">Operation_up</a>
                                         </pre>
                                 </div>
                         </footer>
@@ -112,8 +112,8 @@ def {{function}}({{args}}):
 
                                 <h4 class="form-control-plaintext">Caso Recursivo</h4>
                                 <div class="card" id="recursiveCase">
-                                    <label type="hidden" id="conditionRecLabel" class="form-label"  for="conditionRec" hidden>Recursive Condition</label>
-                                    <select type="hidden" class="form-select" id="conditionRec" name="condition" hidden>
+                                    <label type="hidden" id="recConditionLabel" class="form-label"  for="recCondition" hidden>Recursive Condition</label>
+                                    <select type="hidden" class="form-select" id="recCondition" name="condition" hidden>
                                         <option value="...">...</option>
                                         {{#conditions}}
                                         <option value="{{.}}">{{.}}</option>

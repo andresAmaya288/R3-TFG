@@ -16,7 +16,7 @@ function submitForm() {
         var conditionField = document.getElementById("condition" + i);
         var upCodeField = document.getElementById("upCode" + i);
         var downCodeField = document.getElementById("downCode" + i);
-        var recConditionField = document.getElementById("conditionRec" + i);
+        var recConditionField = document.getElementById("recCondition" + i);
 
         if (!operationField && !conditionField && !upCodeField && !downCodeField && !recConditionField) {
             if (i === 0) {

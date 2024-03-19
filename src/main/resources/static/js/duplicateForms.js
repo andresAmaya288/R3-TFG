@@ -52,15 +52,15 @@ function duplicateRecursiveCase() {
     var upCodeClone = containerClone.querySelector('#upCode');
 
     // Make the conditionRec field visible
-    var conditionRecField = containerClone.querySelector('#conditionRec');
-    var conditionRecFieldLabel = containerClone.querySelector('#conditionRecLabel');
-    conditionRecField.removeAttribute('hidden');
-    conditionRecFieldLabel.removeAttribute('hidden');
+    var recConditionField = containerClone.querySelector('#recCondition');
+    var recConditionFieldLabel = containerClone.querySelector('#recConditionLabel');
+    recConditionField.removeAttribute('hidden');
+    recConditionFieldLabel.removeAttribute('hidden');
 
     // Change the IDs of the clones
     containerClone.id = "recursiveCase" + recId;
     downCodeClone.id = "downCode" + recId;
-    conditionRecField.id = "conditionRec" + recId;
+    recConditionField.id = "recCondition" + recId;
     upCodeClone.id = "upCode" + recId;
 
     var parentID;
@@ -77,6 +77,19 @@ function duplicateRecursiveCase() {
     // Add the clone below the original container
     var originalContainer = document.getElementById(parentID);
     originalContainer.parentNode.insertBefore(containerClone, originalContainer.nextSibling);
+
+    duplicateRecursiveCode();
+    document.getElementById(downCodeClone.id).addEventListener("change", function() {
+        handleChange(downCodeClone.id);
+    });
+
+    document.getElementById(upCodeClone.id).addEventListener("change", function() {
+        handleChange(upCodeClone.id);
+    });
+
+    document.getElementById(recConditionField.id).addEventListener("change", function() {
+        handleChange(recConditionField.id);
+    });
 }
 
 function eliminateRecursiveCase() {
@@ -86,5 +99,7 @@ function eliminateRecursiveCase() {
         // Remove the last cloned base case
         var containerToRemove = document.getElementById("recursiveCase" + recId);
         containerToRemove.parentNode.removeChild(containerToRemove);
+        eliminateRecursiveCode();
     }
+
 }
