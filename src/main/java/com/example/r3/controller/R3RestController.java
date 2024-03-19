@@ -28,18 +28,25 @@ public class R3RestController {
     public ResponseEntity<Boolean> solution (
             HttpServletRequest request,
             @PathVariable String id,
-            @RequestBody Map<String, String> requestBody){
+            @RequestBody Map<String, ArrayList<String> > requestBody){
 
-        String condition = requestBody.get("condition");
-        String operation = requestBody.get("operation");
-        String upCode = requestBody.get("upCode");
-        String downCode = requestBody.get("downCode");
+        ArrayList<String> conditions = requestBody.get("conditions");
+        ArrayList<String> operations = requestBody.get("operations");
+        ArrayList<String> upCodes = requestBody.get("upCodes");
+        ArrayList<String> downCodes = requestBody.get("downCodes");
 
         Long idLong = Long.parseLong(id);
         List<BaseCondition> baseAnswer = new ArrayList<>();
         List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
-        recursiveAnswer.add(new RecursiveCondition(downCode, upCode));
-        baseAnswer.add(new BaseCondition(condition, operation));
+
+        for (int i = 0; i < conditions.size() && i < operations.size(); i++) {
+            baseAnswer.add(new BaseCondition(conditions.get(i), operations.get(i)));
+        }
+        for (int i = 0; i < upCodes.size() && i < downCodes.size(); i++) {
+            baseAnswer.add(new BaseCondition(upCodes.get(i), downCodes.get(i)));
+        }
+
+
         Problem problem = this.dataService.getProblem(idLong);
         if(problem != null) {
             boolean bool = problem.isSolution(baseAnswer, recursiveAnswer);
