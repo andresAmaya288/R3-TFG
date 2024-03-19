@@ -43,7 +43,7 @@ public class R3RestController {
             baseAnswer.add(new BaseCondition(conditions.get(i), operations.get(i)));
         }
         for (int i = 0; i < upCodes.size() && i < downCodes.size(); i++) {
-            baseAnswer.add(new BaseCondition(upCodes.get(i), downCodes.get(i)));
+            recursiveAnswer.add(new RecursiveCondition(downCodes.get(i), upCodes.get(i)));
         }
 
 
