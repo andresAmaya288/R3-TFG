@@ -45,6 +45,14 @@ function eliminateRecursiveCode() {
     }
 }
 
+function eliminateBaseCode() {
+    // Get the last base case container
+    var lastBaseCase = document.querySelector('[id^="addBaseCase"]:last-of-type');
+
+    // Remove the last base case container
+    lastBaseCase.parentNode.removeChild(lastBaseCase);
+}
+
 function duplicateBaseCode() {
     // Clone the entire container
     var containerClone = document.getElementById("addBaseCase").cloneNode(true);

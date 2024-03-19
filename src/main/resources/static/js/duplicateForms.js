@@ -28,8 +28,15 @@ function duplicateBaseCase() {
     // Add the clone below the original container
     var originalContainer = document.getElementById(parentID);
     originalContainer.parentNode.insertBefore(containerClone, originalContainer.nextSibling);
+    duplicateBaseCode()
 
-
+    duplicateRecursiveCode();
+    document.getElementById(operationClone.id).addEventListener("change", function() {
+        handleChange(operationClone.id);
+    });
+    document.getElementById(onditionClone.id).addEventListener("change", function() {
+        handleChange(onditionClone.id);
+    });
 }
 
 function eliminateBaseCase() {
@@ -39,6 +46,7 @@ function eliminateBaseCase() {
         // Remove the last cloned base case
         var containerToRemove = document.getElementById("baseCase" + baseId);
         containerToRemove.parentNode.removeChild(containerToRemove);
+        eliminateBaseCode()
     }
 }
 
