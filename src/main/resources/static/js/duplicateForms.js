@@ -28,6 +28,8 @@ function duplicateBaseCase() {
     // Add the clone below the original container
     var originalContainer = document.getElementById(parentID);
     originalContainer.parentNode.insertBefore(containerClone, originalContainer.nextSibling);
+
+
 }
 
 function eliminateBaseCase() {

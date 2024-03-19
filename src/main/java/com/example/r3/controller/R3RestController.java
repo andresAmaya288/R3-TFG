@@ -34,6 +34,7 @@ public class R3RestController {
         ArrayList<String> operations = requestBody.get("operations");
         ArrayList<String> upCodes = requestBody.get("upCodes");
         ArrayList<String> downCodes = requestBody.get("downCodes");
+        ArrayList<String> recConditions = requestBody.get("recConditions");
 
         Long idLong = Long.parseLong(id);
         List<BaseCondition> baseAnswer = new ArrayList<>();
@@ -42,8 +43,8 @@ public class R3RestController {
         for (int i = 0; i < conditions.size() && i < operations.size(); i++) {
             baseAnswer.add(new BaseCondition(conditions.get(i), operations.get(i)));
         }
-        for (int i = 0; i < upCodes.size() && i < downCodes.size(); i++) {
-            recursiveAnswer.add(new RecursiveCondition(downCodes.get(i), upCodes.get(i)));
+        for (int i = 0; i < upCodes.size() && i < downCodes.size() && i < recConditions.size(); i++) {
+            recursiveAnswer.add(new RecursiveCondition(downCodes.get(i), upCodes.get(i),recConditions.get(i)));
         }
 
 

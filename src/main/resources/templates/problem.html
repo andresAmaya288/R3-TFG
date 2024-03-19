@@ -56,6 +56,14 @@
 def {{function}}({{args}}):
     if <a id="condPy">Condition</a>:
         return <a id="opPy">Operation</a>
+<div id="addBaseCase" style="display: none;">
+    elif <a id="condPyI">Condition</a>:
+	    return <a id="opPyI">Operation</a>
+</div>
+<div id="addRecursiveCase" style="display: none;">
+    elif <a id="condRecPyI">ConditionRec</a>
+	    return {{function}}(<a id="downPyI">Operation_downI</a>) <a id="upPyI">Operation_upI</a>
+</div>
     else:
         return {{function}}(<a id="downPy">Operation_down</a>) <a id="upPy">Operation_up</a>
                                         </pre>

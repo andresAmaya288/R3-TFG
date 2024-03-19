@@ -5,7 +5,8 @@ function submitForm() {
         conditions: [],
         operations: [],
         upCodes: [],
-        downCodes: []
+        downCodes: [],
+        recConditions: []
     };
 
     var i = 0;
@@ -15,26 +16,30 @@ function submitForm() {
         var conditionField = document.getElementById("condition" + i);
         var upCodeField = document.getElementById("upCode" + i);
         var downCodeField = document.getElementById("downCode" + i);
+        var recConditionField = document.getElementById("conditionRec" + i);
 
-        if (!operationField && !conditionField && !upCodeField && !downCodeField) {
+        if (!operationField && !conditionField && !upCodeField && !downCodeField && !recConditionField) {
             if (i === 0) {
                 operationField = document.getElementById("operation");
                 conditionField = document.getElementById("condition");
                 upCodeField = document.getElementById("upCode");
                 downCodeField = document.getElementById("downCode");
+                recConditionField = "";
             } else {
                 aux = false;
             }
         }
 
-        if (operationField && conditionField) {
+        if (operationField && conditionField ) {
             formData.operations.push(operationField.value);
             formData.conditions.push(conditionField.value);
+
         }
 
-        if (upCodeField && downCodeField) {
+        if (upCodeField && downCodeField && (recConditionField || i === 0)) {
             formData.upCodes.push(upCodeField.value);
             formData.downCodes.push(downCodeField.value);
+            formData.recConditions.push(recConditionField.value);
         }
 
         // Actualizar auxiliar si algún campo no es nulo
