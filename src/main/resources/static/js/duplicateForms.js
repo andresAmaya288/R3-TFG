@@ -30,12 +30,11 @@ function duplicateBaseCase() {
     originalContainer.parentNode.insertBefore(containerClone, originalContainer.nextSibling);
     duplicateBaseCode()
 
-    duplicateRecursiveCode();
     document.getElementById(operationClone.id).addEventListener("change", function() {
         handleChange(operationClone.id);
     });
-    document.getElementById(onditionClone.id).addEventListener("change", function() {
-        handleChange(onditionClone.id);
+    document.getElementById(conditionClone.id).addEventListener("change", function() {
+        handleChange(conditionClone.id);
     });
 }
 

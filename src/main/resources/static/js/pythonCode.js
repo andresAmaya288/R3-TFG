@@ -23,7 +23,7 @@ function duplicateRecursiveCode() {
     upCodeClone.id = "upCode" + id + "Py";
 
     // Make the cloned case visible
-    containerClone.style.display = "block";
+    containerClone.style.display = "inline-block";
 
     // Add the clone below the original container
     var originalContainer = document.getElementById("addRecursiveCase");
@@ -46,11 +46,19 @@ function eliminateRecursiveCode() {
 }
 
 function eliminateBaseCode() {
-    // Get the last base case container
-    var lastBaseCase = document.querySelector('[id^="addBaseCase"]:last-of-type');
 
-    // Remove the last base case container
-    lastBaseCase.parentNode.removeChild(lastBaseCase);
+    var baseCodes = document.querySelectorAll('[id^="addBaseCase"]');
+
+    // Check if there are cloned elements
+    if (baseCodes.length > 1) {
+        // Get the last cloned element
+        var lastBaseCode = baseCodes[baseCodes.length - 1];
+        // Remove the last cloned element
+        lastBaseCode.parentNode.removeChild(lastBaseCode);
+    } else {
+        console.log("No more base codes to eliminate.");
+    }
+
 }
 
 function duplicateBaseCode() {
@@ -65,11 +73,11 @@ function duplicateBaseCode() {
     var id = document.querySelectorAll('#addBaseCase').length;
 
     containerClone.id = "addBaseCase" + id;
-    conditionClone.id = "condition" + id + "PyI";
-    operationClone.id = "operation" + id + "PyI";
+    conditionClone.id = "condition" + id + "Py";
+    operationClone.id = "operation" + id + "Py";
 
     // Make the cloned case visible
-    containerClone.style.display = "block";
+    containerClone.style.display = "inline-block";
 
     // Add the clone below the original container
     var originalContainer = document.getElementById("addBaseCase");
