@@ -48,22 +48,6 @@ public class R3controller {
 
 
     //////////////////////////////////////////////////////////////////////////////
-    private List<Condition> parseConditionList(String in){
-        List <Condition> conditions = new ArrayList<>();
-        StringTokenizer stringTokenizer = new StringTokenizer(in);
-        String token = stringTokenizer.nextToken("[=&]");
-        while (stringTokenizer.hasMoreTokens()){
-            /*
-            token = stringTokenizer.nextToken("[=&]");
-
-            if (token != "username")
-                token = stringTokenizer.nextToken("[=&]");
-
-             */
-        }
-
-        return conditions;
-    }
     private void load (){
         if(!init) {
             List<BaseCondition> baseAnswer = new ArrayList<>();

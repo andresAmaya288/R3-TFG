@@ -5,6 +5,7 @@ import com.example.r3.model.entities.Problem;
 import com.example.r3.model.entities.RecursiveCondition;
 import com.example.r3.model.services.DataService;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,5 +57,43 @@ public class R3RestController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    //////////////////////////////////////////////////////////////////
+
+    @PostMapping("sol/recursiveSum")
+    public ResponseEntity<Integer> solRecursiveSum (String input){
+        int [] array = parseIntegerArray(input);
+        if(array != null){
+            if (array.length == 1){
+                int n = array[0];
+                if(n >= 0){
+                    int sum = (n * (n+1))/2;
+                    return new ResponseEntity<>(sum, HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    ////////////////////////////////////////////////////////////////
+
+    private static int[] parseIntegerArray(String input) {
+        String[] numString = input.split(",");
+
+        // Crear un array para almacenar los enteros parseados
+        int[] nums = new int[numString.length];
+
+        // Parsear cada substring a un entero
+        for (int i = 0; i < numString.length; i++) {
+            try {
+                nums[i] = Integer.parseInt(numString[i].trim()); // Eliminar espacios en blanco alrededor del número
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+
+        return nums;
+    }
+
 
 }
