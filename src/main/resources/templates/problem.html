@@ -119,20 +119,39 @@ def {{function}}({{args}}):
                                         <option value="{{.}}">{{.}}</option>
                                         {{/conditions}}
                                     </select>
-                                    <label class="form-label"  for="downCode">Operación (Abajo):</label>
-                                    <select class="form-select" id="downCode" name="downCode">
-                                        <option value="...">...</option>
-                                        {{#downCodes}}
-                                        <option value="{{.}}">{{.}}</option>
-                                        {{/downCodes}}
-                                    </select>
-                                    <label class="form-label" for="upCode">Operación (Arriba):</label>
-                                    <select class="form-select" id="upCode" name="upCode">
-                                        <option value="...">...</option>
-                                        {{#upCodes}}
-                                        <option value="{{.}}">{{.}}</option>
-                                        {{/upCodes}}
-                                    </select>
+
+                                    <div style="display: flex; justify-content: center;">
+                                        <div style="margin-right: 20px;">
+                                            <label for="input1">Input:</label><br>
+                                            <input type="text" id="input1" name="input1"><br><br>
+
+                                            <label class="form-label"  for="downCode">Operación (Abajo):</label>
+                                            <select class="form-select" id="downCode" name="downCode">
+                                                <option value="...">...</option>
+                                                {{#downCodes}}
+                                                <option value="{{.}}">{{.}}</option>
+                                                {{/downCodes}}
+                                            </select>
+
+                                            <label for="input5">Down Res:</label><br>
+                                            <input type="text" id="input5" name="input5"><br><br>
+                                        </div>
+                                        <div>
+                                            <label for="input2">Input 2:</label><br>
+                                            <input type="text" id="input2" name="input2"><br><br>
+
+                                            <label class="form-label" for="upCode">Operación (Arriba):</label>
+                                            <select class="form-select" id="upCode" name="upCode">
+                                                <option value="...">...</option>
+                                                {{#upCodes}}
+                                                <option value="{{.}}">{{.}}</option>
+                                                {{/upCodes}}
+                                            </select>
+
+                                            <label for="input6">Input 6:</label><br>
+                                            <input type="text" id="input6" name="input6"><br><br>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <button class="btn btn-outline-dark" type="button" onclick='duplicateRecursiveCase()'>Agregar Caso Recursivo</button>

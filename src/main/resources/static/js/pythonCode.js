@@ -23,7 +23,7 @@ function duplicateRecursiveCode() {
     upCodeClone.id = "upCode" + id + "Py";
 
     // Make the cloned case visible
-    containerClone.style.display = "inline-block";
+    containerClone.style.display = "block";
 
     // Add the clone below the original container
     var originalContainer = document.getElementById("addRecursiveCase");
@@ -77,7 +77,7 @@ function duplicateBaseCode() {
     operationClone.id = "operation" + id + "Py";
 
     // Make the cloned case visible
-    containerClone.style.display = "inline-block";
+    containerClone.style.display = "block";
 
     // Add the clone below the original container
     var originalContainer = document.getElementById("addBaseCase");
