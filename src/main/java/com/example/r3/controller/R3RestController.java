@@ -76,8 +76,11 @@ public class R3RestController {
     }
 
     @PostMapping("/sub/recursiveSum")
-    public ResponseEntity<Integer> subRecursiveSum (@RequestParam(value = "input") String input,
-                                                    @RequestParam(value = "downcode") String downcode ){
+    public ResponseEntity<Integer> subRecursiveSum (@RequestBody Map<String,String> requestBody){
+
+        String input = requestBody.get("input");
+        String downCode = requestBody.get("downCode");
+
         int [] array = parseIntegerArray(input);
         int subpro = 0;
         boolean aux = true;
@@ -85,7 +88,7 @@ public class R3RestController {
             if (array.length == 1){
                 int n = array[0];
                 if(n >= 0){
-                    switch (downcode){
+                    switch (downCode){
                         case "n + 1":
                             subpro = n + 1;
                             break;
