@@ -18,8 +18,11 @@ public class Problem {
     String code;
     String function;
     String args;
-
     String urlImg;
+
+    String solUrl;
+    String subUrl;
+
     int points;
     int difficulty;
 
@@ -43,7 +46,11 @@ public class Problem {
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();
     */
-    public Problem(String title, String statement, String function, String args, String urlImg, int points, int difficulty, List<String> operations, List<String> conditions, List<String> upCodes, List<String> downCodes, List<BaseCondition> baseAnswer, List<RecursiveCondition> recursiveAnswer) {
+    public Problem(String title, String statement, String function, String args, String urlImg,
+                   int points, int difficulty, List<String> operations,
+                   List<String> conditions, List<String> upCodes,
+                   List<String> downCodes, List<BaseCondition> baseAnswer,
+                   List<RecursiveCondition> recursiveAnswer, String solUrl, String subUrl) {
         this.title = title;
         this.statement = statement;
         this.function = function;
@@ -58,6 +65,8 @@ public class Problem {
         this.baseAnswer = baseAnswer;
         this.recursiveAnswer = recursiveAnswer;
         this.emptyStars = new char [5 - difficulty];
+        this.solUrl = solUrl;
+        this.subUrl = subUrl;
     }
 
     public long getId() {
@@ -210,5 +219,21 @@ public class Problem {
 
     public void setEmptyStars(char[] emptyStars) {
         this.emptyStars = emptyStars;
+    }
+
+    public String getSolUrl() {
+        return solUrl;
+    }
+
+    public void setSolUrl(String solUrl) {
+        this.solUrl = solUrl;
+    }
+
+    public String getSubUrl() {
+        return subUrl;
+    }
+
+    public void setSubUrl(String subUrl) {
+        this.subUrl = subUrl;
     }
 }

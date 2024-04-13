@@ -25,7 +25,7 @@ function getSolution(url,source,destiny) {
     xhr.send(encodeURIComponent(data));
 }
 
-function getSubproblem(url) {
+function getSubproblem(input, code, destiny, final ) {
 
     var downCode = document.getElementById('downCode').value;
     var input = document.getElementById('input').value;
