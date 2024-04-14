@@ -1,9 +1,9 @@
-function getSolution(url,source,destiny) {
+function getSolution(source,destiny) {
 
-    var source = document.getElementById(source).value;
-
+    var initialValue = document.getElementById(source).value;
+    var url = document.getElementById("apiSolUrl").value;
     // Create an object with the data to send
-    var data = source;
+    var data = initialValue;
 
     // Create the HTTP request
     var xhr = new XMLHttpRequest();
@@ -25,10 +25,11 @@ function getSolution(url,source,destiny) {
     xhr.send(encodeURIComponent(data));
 }
 
-function getSubproblem(input, code, destiny, final ) {
+function getSubproblem(source, code, destiny, final) {
 
-    var downCode = document.getElementById('downCode').value;
-    var input = document.getElementById('input').value;
+    var downCode = document.getElementById(code).value;
+    var input = document.getElementById(source).value;
+    var url = document.getElementById("apiSubUrl").value;
 
     var data = {
         input: input,
@@ -61,16 +62,16 @@ function getSubproblem(input, code, destiny, final ) {
             console.error('There was a problem with the fetch request:', error.message);
         });
 
+    getSolution(destiny,final);
+
 }
 
 
-
-
 document.getElementById("input").addEventListener("change", function() {
-    getSolution("/api/sol/recursiveSum",'input','solution');
-    getSubproblem("/api/sub/recursiveSum");
+    getSolution('input','solution');
+    getSubproblem('input', 'downCode', 'subproblem','subsolution');
 });
 
 document.getElementById("downCode").addEventListener("change", function() {
-    getSubproblem("/api/sub/recursiveSum");
+    getSubproblem('input', 'downCode', 'subproblem','subsolution');
 });

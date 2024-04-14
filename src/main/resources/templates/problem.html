@@ -88,6 +88,9 @@ def {{function}}({{args}}):
                 <div>
                     <form id="proForm" action="/problem/{{id}}/solution">
                         <input type="hidden" id="proId" value="{{id}}">
+                        <input type="hidden" id="apiSolUrl" value="/api/sol/{{function}}">
+                        <input type="hidden" id="apiSubUrl" value="/api/sub/{{function}}">>
+
                         <h4 class="form-control-plaintext">Caso Base</h4>
                         <div class="card" id="baseCase">
                             <label class="form-label"  for="condition">Condición:</label>
@@ -132,7 +135,6 @@ def {{function}}({{args}}):
                                         <option value="{{.}}">{{.}}</option>
                                         {{/downCodes}}
                                     </select><br>
-
 
                                     <label for="subproblem">Subproblema:</label><br>
                                     <div id="subproblem" class="card">Subproblema</div><br><br>

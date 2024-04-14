@@ -60,7 +60,7 @@ public class R3RestController {
 
     //////////////////////////////////////////////////////////////////
 
-    @PostMapping("/sol/recursiveSum")
+    @PostMapping("/sol/sumatorio_Recursivo")
     public ResponseEntity<Integer> solRecursiveSum (@RequestBody String input){
         int [] array = parseIntegerArray(input);
         if(array != null){
@@ -75,7 +75,7 @@ public class R3RestController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/sub/recursiveSum")
+    @PostMapping("/sub/sumatorio_Recursivo")
     public ResponseEntity<Integer> subRecursiveSum (@RequestBody Map<String,String> requestBody){
 
         String input = requestBody.get("input");

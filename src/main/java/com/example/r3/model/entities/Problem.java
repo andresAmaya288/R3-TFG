@@ -20,9 +20,6 @@ public class Problem {
     String args;
     String urlImg;
 
-    String solUrl;
-    String subUrl;
-
     int points;
     int difficulty;
 
@@ -50,7 +47,7 @@ public class Problem {
                    int points, int difficulty, List<String> operations,
                    List<String> conditions, List<String> upCodes,
                    List<String> downCodes, List<BaseCondition> baseAnswer,
-                   List<RecursiveCondition> recursiveAnswer, String solUrl, String subUrl) {
+                   List<RecursiveCondition> recursiveAnswer) {
         this.title = title;
         this.statement = statement;
         this.function = function;
@@ -65,8 +62,7 @@ public class Problem {
         this.baseAnswer = baseAnswer;
         this.recursiveAnswer = recursiveAnswer;
         this.emptyStars = new char [5 - difficulty];
-        this.solUrl = solUrl;
-        this.subUrl = subUrl;
+
     }
 
     public long getId() {
@@ -221,19 +217,6 @@ public class Problem {
         this.emptyStars = emptyStars;
     }
 
-    public String getSolUrl() {
-        return solUrl;
-    }
 
-    public void setSolUrl(String solUrl) {
-        this.solUrl = solUrl;
-    }
 
-    public String getSubUrl() {
-        return subUrl;
-    }
-
-    public void setSubUrl(String subUrl) {
-        this.subUrl = subUrl;
-    }
 }
