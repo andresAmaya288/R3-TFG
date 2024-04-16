@@ -85,7 +85,7 @@ function duplicateBaseCode() {
 }
 
 
-// Agregar un listener de evento change al input
+
 document.getElementById("condition").addEventListener("change", function() {
     handleChange("condition");
 });

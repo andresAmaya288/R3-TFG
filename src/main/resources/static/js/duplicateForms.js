@@ -57,6 +57,10 @@ function duplicateRecursiveCase() {
 
     var downCodeClone = containerClone.querySelector('#downCode');
     var upCodeClone = containerClone.querySelector('#upCode');
+    var inputClone = containerClone.querySelector('#input');
+    var subsolutionClone = containerClone.querySelector('#subsolution');
+    var subproblemClone = containerClone.querySelector('#subproblem');
+    var solutionClone = containerClone.querySelector('#solution');
 
     // Make the conditionRec field visible
     var recConditionField = containerClone.querySelector('#recCondition');
@@ -69,6 +73,10 @@ function duplicateRecursiveCase() {
     downCodeClone.id = "downCode" + recId;
     recConditionField.id = "recCondition" + recId;
     upCodeClone.id = "upCode" + recId;
+    inputClone.id = "input" + recId;
+    subsolutionClone.id = "subsolution" + recId;
+    subproblemClone.id = "subproblem" + recId;
+    solutionClone.id = "solution" + recId;
 
     var parentID;
 
@@ -89,14 +97,20 @@ function duplicateRecursiveCase() {
     document.getElementById(downCodeClone.id).addEventListener("change", function() {
         handleChange(downCodeClone.id);
     });
-
     document.getElementById(upCodeClone.id).addEventListener("change", function() {
         handleChange(upCodeClone.id);
     });
-
     document.getElementById(recConditionField.id).addEventListener("change", function() {
         handleChange(recConditionField.id);
     });
+    document.getElementById(inputClone.id).addEventListener("change", function() {
+        getSolution(inputClone.id,solutionClone.id);
+        getSubproblem(inputClone.id, downCodeClone.id,subproblemClone.id,subsolutionClone.id);
+    });
+    document.getElementById(downCodeClone.id).addEventListener("change", function() {
+        getSubproblem(inputClone.id, downCodeClone.id,subproblemClone.id,subsolutionClone.id);
+    });
+
 }
 
 function eliminateRecursiveCase() {
