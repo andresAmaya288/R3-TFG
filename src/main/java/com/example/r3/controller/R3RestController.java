@@ -25,6 +25,8 @@ public class R3RestController {
     @Autowired
     EntityManager entityManager;
 
+
+
     @PostMapping("/problem/{id}/solution")
     public ResponseEntity<Boolean> solution (
             HttpServletRequest request,
@@ -60,7 +62,7 @@ public class R3RestController {
 
     //////////////////////////////////////////////////////////////////
 
-    @PostMapping("/sol/sumatorio_Recursivo")
+    @PostMapping("/sol/sumatorioRecursivo")
     public ResponseEntity<Integer> solRecursiveSum (@RequestBody String input){
         int [] array = parseIntegerArray(input);
         if(array != null){
@@ -75,7 +77,7 @@ public class R3RestController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/sub/sumatorio_Recursivo")
+    @PostMapping("/sub/sumatorioRecursivo")
     public ResponseEntity<Integer> subRecursiveSum (@RequestBody Map<String,String> requestBody){
 
         String input = requestBody.get("input");
@@ -114,6 +116,61 @@ public class R3RestController {
 
     ////////////////////////////////////////////////////////////////
 
+    @PostMapping("/sol/sumaLenta")
+    public ResponseEntity<Integer> solSlowAdd (@RequestBody String input){
+        int [] array = parseIntegerArray(input);
+        if(array != null){
+            if (array.length == 2){
+                int a = array[0];
+                int b = array[1];
+                if(a >= 0 && b >= 0){
+                    int sum = a + b;
+                    return new ResponseEntity<>(sum, HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/sub/sumaLenta")
+    public ResponseEntity<String> subSlowAdd (@RequestBody Map<String,String> requestBody){
+
+        String input = requestBody.get("input");
+        String downCode = requestBody.get("downCode");
+
+        int [] array = parseIntegerArray(input);
+        String subpro = "";
+        boolean aux = true;
+        if(array != null){
+            if (array.length == 2){
+
+                int a = array[0];
+                int b = array[1];
+                if(a >= 0 && b >= 0){
+                    switch (downCode){
+                        case "a - 1, b":
+                            subpro = (a-1) + ", " + b;
+                            break;
+                        case "a - 1, b - 1":
+                            subpro = (a-1) + ", " + (b-1);
+                            break;
+                        case "a, b - 1":
+                            subpro = a + ", " + (b-1);
+                            break;
+                        default:
+                            aux = false;
+                            break;
+                    }
+                    if(aux){
+                        return new ResponseEntity<>(subpro, HttpStatus.OK);
+                    }
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    ////////////////////////////////////////////////////////////////
+
     private static int[] parseIntegerArray(String input) {
         String[] numString = input.split(",");
 
@@ -131,6 +188,5 @@ public class R3RestController {
 
         return nums;
     }
-
 
 }

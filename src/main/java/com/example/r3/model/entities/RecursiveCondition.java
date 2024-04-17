@@ -12,6 +12,8 @@ public class RecursiveCondition extends Condition {
     String upCode;
     String condition;
 
+    int num;
+
     public RecursiveCondition(String downCode, String upCode) {
         this.downCode = downCode;
         this.upCode = upCode;
@@ -21,6 +23,19 @@ public class RecursiveCondition extends Condition {
         this.downCode = downCode;
         this.upCode = upCode;
         this.condition = condition;
+    }
+
+    public RecursiveCondition(String downCode, String upCode, String condition, int num) {
+        this.downCode = downCode;
+        this.upCode = upCode;
+        this.condition = condition;
+        this.num = num;
+    }
+
+    public RecursiveCondition(String downCode, String upCode, int num) {
+        this.downCode = downCode;
+        this.upCode = upCode;
+        this.num = num;
     }
 
     @Override
@@ -34,5 +49,13 @@ public class RecursiveCondition extends Condition {
     @Override
     public int hashCode() {
         return Objects.hash(downCode, upCode, condition);
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }

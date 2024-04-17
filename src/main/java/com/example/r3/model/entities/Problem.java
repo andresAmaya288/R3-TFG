@@ -24,6 +24,7 @@ public class Problem {
     int difficulty;
 
     char[] emptyStars;
+    char [] fullStars;
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     List<String> operations = new ArrayList<>();
@@ -62,6 +63,7 @@ public class Problem {
         this.baseAnswer = baseAnswer;
         this.recursiveAnswer = recursiveAnswer;
         this.emptyStars = new char [5 - difficulty];
+        this.fullStars = new char [difficulty];
 
     }
 
@@ -123,18 +125,21 @@ public class Problem {
     }
 
     public boolean isSolution(List<BaseCondition> baseAnswer,List<RecursiveCondition> recursiveAnswer ){
-        Boolean sol = true;
-        Boolean auxCond1 = false, auxCond2 = false;
-        for (BaseCondition condition : baseAnswer){
-            auxCond1 = true;
-            sol &= this.baseAnswer.contains(condition);
-        }
-        for (RecursiveCondition condition : recursiveAnswer){
-            auxCond2= true;
-            sol &= this.recursiveAnswer.contains(condition);
-        }
+        Boolean sol = false;
+        BaseCondition baseI;
+        RecursiveCondition recI;
 
-        return sol && auxCond1 && auxCond2;
+        if (baseAnswer.size() == recursiveAnswer.size() && !baseAnswer.isEmpty()) {
+            sol = true;
+            for (int i = 0; i < baseAnswer.size(); i++) {
+                baseI = baseAnswer.get(i);
+                recI = recursiveAnswer.get(i);
+
+                sol &= this.baseAnswer.contains(baseI) && this.recursiveAnswer.contains(recI) && baseI.getNum() == recI.getNum();
+
+            }
+        }
+        return sol;
     }
 
     public String getTitle() {
@@ -217,6 +222,11 @@ public class Problem {
         this.emptyStars = emptyStars;
     }
 
+    public char[] getFullStars() {
+        return fullStars;
+    }
 
-
+    public void setFullStars(char[] fullStars) {
+        this.fullStars = fullStars;
+    }
 }

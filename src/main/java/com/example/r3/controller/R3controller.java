@@ -29,6 +29,10 @@ public class R3controller {
     @Autowired
     EntityManager entityManager;
 
+    @Autowired
+    ProblemLoader problemLoader;
+
+
     static boolean init = false;
 
     @GetMapping("/")
@@ -50,48 +54,8 @@ public class R3controller {
     //////////////////////////////////////////////////////////////////////////////
     private void load (){
         if(!init) {
-            List<BaseCondition> baseAnswer = new ArrayList<>();
-            List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
-            RecursiveCondition recSol = new RecursiveCondition("n - 1", "+ n");
-            BaseCondition baseSol = new BaseCondition("n == 1", "return 1");
-            recursiveAnswer.add(recSol);
-            baseAnswer.add(baseSol);
-
-            List<String> operations = new ArrayList<>();
-            List<String> conditions = new ArrayList<>();
-            List<String> upCodes = new ArrayList<>();
-            List<String> downCodes = new ArrayList<>();
-
-            operations.add("return n / 2");
-            operations.add("return 1");
-            operations.add("return n * 2");
-
-            conditions.add("n == 1");
-            conditions.add("n > 1");
-            conditions.add("n != 1");
-
-            upCodes.add("+ 1");
-            upCodes.add("- n");
-            upCodes.add("+ n");
-
-            downCodes.add("n + 1");
-            downCodes.add("n / 2");
-            downCodes.add("n - 1");
-
-
-            String title = "Sumatorio recursivo";
-            String statement = "Diseña una función sumatorioRecursivo(n) que calcule el valor del sumatorio de los primeros n números naturales. El parámetro n, entero positivo, representa hasta que número habrá que sumar.  ";
-            String function = "sumatorio_Recursivo";
-            String args = "n";
-            String url = "/../img/Sumatorio.png";
-            int points = 200;
-            int difficulty = 1;
-
-
-
-            Problem recursiveSumatory = new Problem(title,statement,
-                    function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
-            this.dataService.addProblem(recursiveSumatory);
+            problemLoader.addRecursiveSum();
+            problemLoader.addSlowAdd();
             init = true;
         }
     }
