@@ -134,7 +134,6 @@ public class Problem {
             for (int i = 0; i < baseAnswer.size(); i++) {
                 baseI = baseAnswer.get(i);
                 recI = recursiveAnswer.get(i);
-
                 sol &= this.baseAnswer.contains(baseI) && this.recursiveAnswer.contains(recI) && baseI.getNum() == recI.getNum();
 
             }

@@ -114,4 +114,61 @@ public class ProblemLoader {
         this.dataService.addProblem(recursiveSumatory);
     }
 
+    public void addMult(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+        RecursiveCondition recSol = new RecursiveCondition("a, b - 1", "+ a",1);
+        BaseCondition baseSol = new BaseCondition("b == 0", "return 0",1);
+        RecursiveCondition recSol2 = new RecursiveCondition("a - 1, b", "+ b",2);
+        BaseCondition baseSol2 = new BaseCondition("a == 0", "return 0",2);
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+        recursiveAnswer.add(recSol2);
+        baseAnswer.add(baseSol2);
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return a");
+        operations.add("return b");
+        operations.add("return 0");
+        operations.add("return 1");
+
+
+        conditions.add("a == 0");
+        conditions.add("b == 0");
+        conditions.add("a < b");
+        conditions.add("a > b");
+        conditions.add("b < 0");
+        conditions.add("a < 0");
+
+
+        upCodes.add("+ b");
+        upCodes.add("+ 1");
+        upCodes.add("+ a");
+        upCodes.add("- b");
+        upCodes.add("- a");
+
+        downCodes.add("a - 1, b");
+        downCodes.add("a, b - 1");
+        downCodes.add("a + 1, b");
+        downCodes.add("a, b + 1");
+
+
+        String title = "Multiplicación";
+        String statement = "Diseña una función multiplication(a, b) que calcule recursivamente la multiplicación de los enteros positivos a y b, donde a y b son los factores dados.";
+        String function = "multiplication";
+        String args = "a, b";
+        String url = "/../img/Multiplicación.png";
+        int points = 400;
+        int difficulty = 2;
+
+
+
+        Problem recursiveSumatory = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
+        this.dataService.addProblem(recursiveSumatory);
+    }
 }

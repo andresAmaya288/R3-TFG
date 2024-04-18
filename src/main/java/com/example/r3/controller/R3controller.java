@@ -56,6 +56,7 @@ public class R3controller {
         if(!init) {
             problemLoader.addRecursiveSum();
             problemLoader.addSlowAdd();
+            problemLoader.addMult();
             init = true;
         }
     }

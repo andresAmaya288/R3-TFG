@@ -12,7 +12,7 @@ public class RecursiveCondition extends Condition {
     String upCode;
     String condition;
 
-    int num;
+    int num = -1;
 
     public RecursiveCondition(String downCode, String upCode) {
         this.downCode = downCode;
