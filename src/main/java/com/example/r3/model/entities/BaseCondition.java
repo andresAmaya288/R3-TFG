@@ -11,18 +11,12 @@ public class BaseCondition extends Condition {
     String condition;
     String operation;
 
-    int num = -1;
 
     public BaseCondition(String condition, String operation) {
         this.condition = condition;
         this.operation = operation;
     }
 
-    public BaseCondition(String condition, String operation, int num) {
-        this.condition = condition;
-        this.operation = operation;
-        this.num = num;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -37,11 +31,5 @@ public class BaseCondition extends Condition {
         return Objects.hash(condition, operation);
     }
 
-    public int getNum() {
-        return num;
-    }
 
-    public void setNum(int num) {
-        this.num = num;
-    }
 }

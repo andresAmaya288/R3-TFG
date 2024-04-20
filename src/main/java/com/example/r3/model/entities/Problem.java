@@ -35,20 +35,21 @@ public class Problem {
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     List<String> downCodes = new ArrayList<>();
 
+
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
-    List<BaseCondition> baseAnswer = new ArrayList<>();
-    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE})
-    List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+    List<Solution> solutions = new ArrayList<>();
+
+
 
     /*
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     private List<User> userList  = new ArrayList<>();
     */
+
     public Problem(String title, String statement, String function, String args, String urlImg,
                    int points, int difficulty, List<String> operations,
                    List<String> conditions, List<String> upCodes,
-                   List<String> downCodes, List<BaseCondition> baseAnswer,
-                   List<RecursiveCondition> recursiveAnswer) {
+                   List<String> downCodes, List<Solution> solutions) {
         this.title = title;
         this.statement = statement;
         this.function = function;
@@ -60,8 +61,7 @@ public class Problem {
         this.conditions = conditions;
         this.upCodes = upCodes;
         this.downCodes = downCodes;
-        this.baseAnswer = baseAnswer;
-        this.recursiveAnswer = recursiveAnswer;
+        this.solutions = solutions;
         this.emptyStars = new char [5 - difficulty];
         this.fullStars = new char [difficulty];
 
@@ -91,21 +91,6 @@ public class Problem {
         this.code = code;
     }
 
-    public List<BaseCondition> getBaseAnswer() {
-        return baseAnswer;
-    }
-
-    public void setBaseAnswer(List<BaseCondition> baseAnswer) {
-        this.baseAnswer = baseAnswer;
-    }
-
-    public List<RecursiveCondition> getRecursiveAnswer() {
-        return recursiveAnswer;
-    }
-
-    public void setRecursiveAnswer(List<RecursiveCondition> recursiveAnswer) {
-        this.recursiveAnswer = recursiveAnswer;
-    }
 
     /*
     public List<User> getUserList() {
@@ -124,21 +109,8 @@ public class Problem {
         this.difficulty = difficulty;
     }
 
-    public boolean isSolution(List<BaseCondition> baseAnswer,List<RecursiveCondition> recursiveAnswer ){
-        Boolean sol = false;
-        BaseCondition baseI;
-        RecursiveCondition recI;
-
-        if (baseAnswer.size() == recursiveAnswer.size() && !baseAnswer.isEmpty()) {
-            sol = true;
-            for (int i = 0; i < baseAnswer.size(); i++) {
-                baseI = baseAnswer.get(i);
-                recI = recursiveAnswer.get(i);
-                sol &= this.baseAnswer.contains(baseI) && this.recursiveAnswer.contains(recI) && baseI.getNum() == recI.getNum();
-
-            }
-        }
-        return sol;
+    public boolean isSolution(Solution solution){
+        return this.solutions.contains(solution);
     }
 
     public String getTitle() {

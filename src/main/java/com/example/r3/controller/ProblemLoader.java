@@ -4,6 +4,7 @@ package com.example.r3.controller;
 import com.example.r3.model.entities.BaseCondition;
 import com.example.r3.model.entities.Problem;
 import com.example.r3.model.entities.RecursiveCondition;
+import com.example.r3.model.entities.Solution;
 import com.example.r3.model.services.DataService;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,16 @@ public class ProblemLoader {
     public void addRecursiveSum(){
         List<BaseCondition> baseAnswer = new ArrayList<>();
         List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
-        RecursiveCondition recSol = new RecursiveCondition("n - 1", "+ n",1);
-        BaseCondition baseSol = new BaseCondition("n == 1", "return 1",1);
+
+        RecursiveCondition recSol = new RecursiveCondition("n - 1", "+ n");
+        BaseCondition baseSol = new BaseCondition("n == 1", "return 1");
+
         recursiveAnswer.add(recSol);
         baseAnswer.add(baseSol);
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
 
         List<String> operations = new ArrayList<>();
         List<String> conditions = new ArrayList<>();
@@ -61,21 +68,34 @@ public class ProblemLoader {
 
 
         Problem recursiveSumatory = new Problem(title,statement,
-                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
         this.dataService.addProblem(recursiveSumatory);
     }
 
     public void addSlowAdd(){
-        List<BaseCondition> baseAnswer = new ArrayList<>();
-        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
-        RecursiveCondition recSol = new RecursiveCondition("a, b - 1", "+ 1",1);
-        BaseCondition baseSol = new BaseCondition("b == 0", "return a",1);
-        RecursiveCondition recSol2 = new RecursiveCondition("a - 1, b", "+ 1",2);
-        BaseCondition baseSol2 = new BaseCondition("a == 0", "return b",2);
-        recursiveAnswer.add(recSol);
-        baseAnswer.add(baseSol);
-        recursiveAnswer.add(recSol2);
-        baseAnswer.add(baseSol2);
+
+        List<BaseCondition> baseAnswer1 = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer1 = new ArrayList<>();
+        List<BaseCondition> baseAnswer2 = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("a, b - 1", "+ 1");
+        BaseCondition baseSol = new BaseCondition("b == 0", "return a");
+        RecursiveCondition recSol2 = new RecursiveCondition("a - 1, b", "+ 1");
+        BaseCondition baseSol2 = new BaseCondition("a == 0", "return b");
+
+        recursiveAnswer1.add(recSol);
+        baseAnswer1.add(baseSol);
+        recursiveAnswer2.add(recSol2);
+        baseAnswer2.add(baseSol2);
+
+        Solution solution1 = new Solution(baseAnswer1,recursiveAnswer1);
+        Solution solution2 = new Solution(baseAnswer2,recursiveAnswer2);
+
+        List<Solution> sols = new ArrayList<>();
+
+        sols.add(solution1);
+        sols.add(solution2);
 
         List<String> operations = new ArrayList<>();
         List<String> conditions = new ArrayList<>();
@@ -110,21 +130,33 @@ public class ProblemLoader {
 
 
         Problem recursiveSumatory = new Problem(title,statement,
-                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
         this.dataService.addProblem(recursiveSumatory);
     }
 
     public void addMult(){
-        List<BaseCondition> baseAnswer = new ArrayList<>();
-        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
-        RecursiveCondition recSol = new RecursiveCondition("a, b - 1", "+ a",1);
-        BaseCondition baseSol = new BaseCondition("b == 0", "return 0",1);
-        RecursiveCondition recSol2 = new RecursiveCondition("a - 1, b", "+ b",2);
-        BaseCondition baseSol2 = new BaseCondition("a == 0", "return 0",2);
-        recursiveAnswer.add(recSol);
-        baseAnswer.add(baseSol);
-        recursiveAnswer.add(recSol2);
-        baseAnswer.add(baseSol2);
+        List<BaseCondition> baseAnswer1 = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer1 = new ArrayList<>();
+        List<BaseCondition> baseAnswer2 = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("a, b - 1", "+ a");
+        BaseCondition baseSol = new BaseCondition("b == 0", "return 0");
+        RecursiveCondition recSol2 = new RecursiveCondition("a - 1, b", "+ b");
+        BaseCondition baseSol2 = new BaseCondition("a == 0", "return 0");
+
+        recursiveAnswer1.add(recSol);
+        baseAnswer1.add(baseSol);
+        recursiveAnswer2.add(recSol2);
+        baseAnswer2.add(baseSol2);
+
+        Solution solution1 = new Solution(baseAnswer1,recursiveAnswer1);
+        Solution solution2 = new Solution(baseAnswer2,recursiveAnswer2);
+
+        List<Solution> sols = new ArrayList<>();
+
+        sols.add(solution1);
+        sols.add(solution2);
 
         List<String> operations = new ArrayList<>();
         List<String> conditions = new ArrayList<>();
@@ -168,7 +200,7 @@ public class ProblemLoader {
 
 
         Problem recursiveSumatory = new Problem(title,statement,
-                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, baseAnswer, recursiveAnswer);
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
         this.dataService.addProblem(recursiveSumatory);
     }
 }
