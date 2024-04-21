@@ -272,14 +272,7 @@ public class ProblemLoader {
         RecursiveCondition recSol2 = new RecursiveCondition("n - 2", "fibonacci(n - 1)");
         BaseCondition baseSol = new BaseCondition("n == 1", "return 1");
         BaseCondition baseSol2 = new BaseCondition("n == 0", "return 0");
-
-        recursiveAnswer.add(recSol);
-        baseAnswer.add(baseSol);
-        baseAnswer.add(baseSol2);
-
-        recursiveAnswer2.add(recSol2);
-        baseAnswer2.add(baseSol);
-        baseAnswer2.add(baseSol2);
+        
 
 
         Solution sol = new Solution(baseAnswer,recursiveAnswer);
@@ -303,34 +296,34 @@ public class ProblemLoader {
         conditions.add("n != 1");
         conditions.add("n <= 1");
 
-        upCodes.add("/ b");
-        upCodes.add("* b");
-        upCodes.add("+ b");
-        upCodes.add("/ e");
-        upCodes.add("* e");
-        upCodes.add("+ e");
-
-        downCodes.add("b, e - 1");
-        downCodes.add("b, e + 1");
-        downCodes.add("b, e // 2");
-        downCodes.add("b - 1, e");
-        downCodes.add("b + 1, e");
-        downCodes.add("b // 2, e");
+        upCodes.add("+ n");
+        upCodes.add("+ 1");
+        upCodes.add("fibonacci(n - 1)");
+        upCodes.add("fibonacci(n - 2)");
+        upCodes.add("fibonacci(n)");
 
 
-        String title = "Potencias recursivas";
-        String statement = "Diseña una función potenciaRecursiva(b, e) para calcular potencias de forma recursiva, dónde el parámetro b, entero, es la base y e, entero, es el exponente.";
-        String function = "potenciaRecursiva";
-        String args = "b, e";
-        String url = "/../img/Potencia.png";
-        int points = 400;
-        int difficulty = 2;
+        downCodes.add("n - 1");
+        downCodes.add("n + 1");
+        downCodes.add("n - 2");
+        downCodes.add("n");
+        downCodes.add("n / 2");
 
 
 
-        Problem recursiveSumatory = new Problem(title,statement,
+        String title = "Fibonacci";
+        String statement = "Diseña una función fibonacci(n) que calcúle el enésimo término de la sucesión de fibonacci. Dicha sucesión parte de los términos 1 y 0 y a partir de ahí cada término se calcula cómo la suma de los dos anteriores. El índice n es un número entero positivo.";
+        String function = "fibonacci";
+        String args = "n";
+        String url = "/../img/Fibonacci.png";
+        int points = 600;
+        int difficulty = 3;
+
+
+
+        Problem fibonacci = new Problem(title,statement,
                 function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
-        this.dataService.addProblem(recursiveSumatory);
+        this.dataService.addProblem(fibonacci);
     }
 
 }

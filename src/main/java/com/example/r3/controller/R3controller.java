@@ -58,6 +58,7 @@ public class R3controller {
             problemLoader.addSlowAdd();
             problemLoader.addMult();
             problemLoader.addPow();
+            problemLoader.addFibonacci();
             init = true;
         }
     }

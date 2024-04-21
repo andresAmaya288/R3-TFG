@@ -296,6 +296,74 @@ public class R3RestController {
 
     ////////////////////////////////////////////////////////////////
 
+    @PostMapping("/sol/fibonacci")
+    public ResponseEntity<Integer> solFibonacci (@RequestBody String input){
+        int [] array = parseIntegerArray(input);
+        if(array != null){
+            if (array.length == 1){
+                int n = array[0];
+                if(n >= 0){
+                    int temp, aux = 1, aux2 = 0;
+                    for (int i = 0; i < n; i++) {
+                        temp = aux + aux2;
+                        aux2 = aux;
+                        aux = temp;
+                    }
+                    if (n == 0){
+                        aux = 0;
+                    }
+                    return new ResponseEntity<>(aux, HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/sub/fibonacci")
+    public ResponseEntity<String> subFibonacci (@RequestBody Map<String,String> requestBody){
+
+        String input = requestBody.get("input");
+        String downCode = requestBody.get("downCode");
+
+        int [] array = parseIntegerArray(input);
+        String subpro = "";
+        boolean aux = true;
+        if(array != null){
+            if (array.length == 1){
+
+                int n = array[0];
+                if(n >= 0 ){
+                    switch (downCode){
+                        case "n - 1":
+                            subpro = String.valueOf(n - 1);
+                            break;
+                        case "n - 2":
+                            subpro = String.valueOf(n - 2);
+                            break;
+                        case "n":
+                            subpro = String.valueOf(n);
+                            break;
+                        case "n / 2":
+                            subpro = String.valueOf(n/2);
+                            break;
+                        case "n + 1":
+                            subpro = String.valueOf(n + 1);
+                            break;
+                        default:
+                            aux = false;
+                            break;
+                    }
+                    if(aux){
+                        return new ResponseEntity<>(subpro, HttpStatus.OK);
+                    }
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    ////////////////////////////////////////////////////////////////
+
     private static int[] parseIntegerArray(String input) {
         String[] numString = input.split(",");
 
