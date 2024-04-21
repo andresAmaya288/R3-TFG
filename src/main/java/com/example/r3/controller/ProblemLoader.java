@@ -203,4 +203,134 @@ public class ProblemLoader {
                 function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
         this.dataService.addProblem(recursiveSumatory);
     }
+
+    public void addPow(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("b, e - 1", "* e");
+        BaseCondition baseSol = new BaseCondition("e == 0", "return 1");
+
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return 0");
+        operations.add("return 1");
+        operations.add("return -1");
+
+        conditions.add("e == 0");
+        conditions.add("b == 0");
+        conditions.add("b > 0");
+        conditions.add("e > 0");
+
+        upCodes.add("/ b");
+        upCodes.add("* b");
+        upCodes.add("+ b");
+        upCodes.add("/ e");
+        upCodes.add("* e");
+        upCodes.add("+ e");
+
+        downCodes.add("b, e - 1");
+        downCodes.add("b, e + 1");
+        downCodes.add("b, e // 2");
+        downCodes.add("b - 1, e");
+        downCodes.add("b + 1, e");
+        downCodes.add("b // 2, e");
+
+
+        String title = "Potencias recursivas";
+        String statement = "Diseña una función potenciaRecursiva(b, e) para calcular potencias de forma recursiva, dónde el parámetro b, entero, es la base y e, entero, es el exponente.";
+        String function = "potenciaRecursiva";
+        String args = "b, e";
+        String url = "/../img/Potencia.png";
+        int points = 400;
+        int difficulty = 2;
+
+
+
+        Problem recursiveSumatory = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
+        this.dataService.addProblem(recursiveSumatory);
+    }
+
+    public void addFibonacci(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+        List<BaseCondition> baseAnswer2 = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("n - 1", "fibonacci(n - 2)");
+        RecursiveCondition recSol2 = new RecursiveCondition("n - 2", "fibonacci(n - 1)");
+        BaseCondition baseSol = new BaseCondition("n == 1", "return 1");
+        BaseCondition baseSol2 = new BaseCondition("n == 0", "return 0");
+
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+        baseAnswer.add(baseSol2);
+
+        recursiveAnswer2.add(recSol2);
+        baseAnswer2.add(baseSol);
+        baseAnswer2.add(baseSol2);
+
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+        Solution sol2 = new Solution(baseAnswer2,recursiveAnswer2);
+
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
+        sols.add(sol2);
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return 0");
+        operations.add("return 1");
+        operations.add("return -1");
+
+        conditions.add("n <= 0");
+        conditions.add("n == 1");
+        conditions.add("n != 1");
+        conditions.add("n <= 1");
+
+        upCodes.add("/ b");
+        upCodes.add("* b");
+        upCodes.add("+ b");
+        upCodes.add("/ e");
+        upCodes.add("* e");
+        upCodes.add("+ e");
+
+        downCodes.add("b, e - 1");
+        downCodes.add("b, e + 1");
+        downCodes.add("b, e // 2");
+        downCodes.add("b - 1, e");
+        downCodes.add("b + 1, e");
+        downCodes.add("b // 2, e");
+
+
+        String title = "Potencias recursivas";
+        String statement = "Diseña una función potenciaRecursiva(b, e) para calcular potencias de forma recursiva, dónde el parámetro b, entero, es la base y e, entero, es el exponente.";
+        String function = "potenciaRecursiva";
+        String args = "b, e";
+        String url = "/../img/Potencia.png";
+        int points = 400;
+        int difficulty = 2;
+
+
+
+        Problem recursiveSumatory = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
+        this.dataService.addProblem(recursiveSumatory);
+    }
+
 }
