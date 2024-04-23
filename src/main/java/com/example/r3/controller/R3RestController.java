@@ -404,20 +404,17 @@ public class R3RestController {
                 int d = array[1];
                 if(n >= 0 && d <= 9 && d >= 0){
                     switch (downCode){
-                        case "n - 1":
-                            subpro = String.valueOf(n - 1);
+                        case "n, d // 10":
+                            subpro = n + ", " + (d / 10);
                             break;
-                        case "n - 2":
-                            subpro = String.valueOf(n - 2);
+                        case "n, d % 10":
+                            subpro = n + ", " + (d % 10);
                             break;
-                        case "n":
-                            subpro = String.valueOf(n);
+                        case "n // 10, d":
+                            subpro = (n / 10) + ", " + d;
                             break;
-                        case "n / 2":
-                            subpro = String.valueOf(n/2);
-                            break;
-                        case "n + 1":
-                            subpro = String.valueOf(n + 1);
+                        case "n % 10, d":
+                            subpro = (n % 10) + ", " + d;
                             break;
                         default:
                             aux = false;
@@ -443,7 +440,7 @@ public class R3RestController {
         // Parsear cada substring a un entero
         for (int i = 0; i < numString.length; i++) {
             try {
-                nums[i] = Integer.parseInt(numString[i].trim()); // Eliminar espacios en blanco alrededor del número
+                nums[i] = Integer.parseInt(numString[i].trim());
             } catch (NumberFormatException e) {
                 return null;
             }

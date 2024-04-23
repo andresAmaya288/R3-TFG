@@ -340,9 +340,9 @@ public class ProblemLoader {
         List<BaseCondition> baseAnswer2 = new ArrayList<>();
         List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
 
-        RecursiveCondition recSol = new RecursiveCondition("n - 1", "+ fibonacci(n - 2)");
-        BaseCondition baseSol = new BaseCondition("n == 1", "return 1");
-        BaseCondition baseSol12 = new BaseCondition("n <= 0", "return 0");
+        RecursiveCondition recSol = new RecursiveCondition("n // 10, d", " ");
+        BaseCondition baseSol = new BaseCondition("n % 10 == d", "return True");
+        BaseCondition baseSol12 = new BaseCondition("n < 10", "return False");
 
 
         recursiveAnswer.add(recSol);
@@ -363,10 +363,9 @@ public class ProblemLoader {
         operations.add("return True");
         operations.add("return False");
 
-        conditions.add("n // 10 == d");
         conditions.add("n % 10 == d");
+        conditions.add("n % 10 != d");
         conditions.add("n < 10");
-        conditions.add("n / 10 == d");
         conditions.add("n > 10");
 
 
@@ -382,7 +381,7 @@ public class ProblemLoader {
 
 
 
-        String title = "Contiene el Digito ?";
+        String title = "Contiene Digito?";
         String statement = "Diseña una función contieneDigito(n, d) que devuelva True si el número n contiene el digito d. Dónde N es un entero positivo y d es un digito entre el 0 y el 9.";
         String function = "contieneDigito";
         String args = "n, d";
@@ -392,9 +391,9 @@ public class ProblemLoader {
 
 
 
-        Problem fibonacci = new Problem(title,statement,
+        Problem digit = new Problem(title,statement,
                 function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
-        this.dataService.addProblem(fibonacci);
+        this.dataService.addProblem(digit);
     }
 
 }
