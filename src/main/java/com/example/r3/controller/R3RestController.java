@@ -304,7 +304,7 @@ public class R3RestController {
                 int n = array[0];
                 if(n >= 0){
                     int temp, aux = 1, aux2 = 0;
-                    for (int i = 0; i < n; i++) {
+                    for (int i = 1; i < n; i++) {
                         temp = aux + aux2;
                         aux2 = aux;
                         aux = temp;
@@ -333,6 +333,76 @@ public class R3RestController {
 
                 int n = array[0];
                 if(n >= 0 ){
+                    switch (downCode){
+                        case "n - 1":
+                            subpro = String.valueOf(n - 1);
+                            break;
+                        case "n - 2":
+                            subpro = String.valueOf(n - 2);
+                            break;
+                        case "n":
+                            subpro = String.valueOf(n);
+                            break;
+                        case "n / 2":
+                            subpro = String.valueOf(n/2);
+                            break;
+                        case "n + 1":
+                            subpro = String.valueOf(n + 1);
+                            break;
+                        default:
+                            aux = false;
+                            break;
+                    }
+                    if(aux){
+                        return new ResponseEntity<>(subpro, HttpStatus.OK);
+                    }
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    ////////////////////////////////////////////////////////////////
+
+    @PostMapping("/sol/contieneDigit")
+    public ResponseEntity<Boolean> solDigit (@RequestBody String input){
+        int [] array = parseIntegerArray(input);
+        if(array != null){
+            if (array.length == 2){
+                int n = array[0];
+                int d = array[1];
+                if(n >= 0 && d <= 9 && d >= 0){
+                    boolean aux = false;
+                    while (n != 0 && !aux) {
+
+                        if (n%10 == d) {
+                            aux = true;
+                        }
+
+                        n /= 10;
+                    }
+                    return new ResponseEntity<>(aux, HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/sub/contieneDigit")
+    public ResponseEntity<String> subDigit (@RequestBody Map<String,String> requestBody){
+
+        String input = requestBody.get("input");
+        String downCode = requestBody.get("downCode");
+
+        int [] array = parseIntegerArray(input);
+        String subpro = "";
+        boolean aux = true;
+        if(array != null){
+            if (array.length == 2){
+
+                int n = array[0];
+                int d = array[1];
+                if(n >= 0 && d <= 9 && d >= 0){
                     switch (downCode){
                         case "n - 1":
                             subpro = String.valueOf(n - 1);

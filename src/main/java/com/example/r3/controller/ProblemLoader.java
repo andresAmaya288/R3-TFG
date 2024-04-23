@@ -268,12 +268,20 @@ public class ProblemLoader {
         List<BaseCondition> baseAnswer2 = new ArrayList<>();
         List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
 
-        RecursiveCondition recSol = new RecursiveCondition("n - 1", "fibonacci(n - 2)");
-        RecursiveCondition recSol2 = new RecursiveCondition("n - 2", "fibonacci(n - 1)");
+        RecursiveCondition recSol = new RecursiveCondition("n - 1", "+ fibonacci(n - 2)");
+        RecursiveCondition recSol2 = new RecursiveCondition("n - 2", "+ fibonacci(n - 1)");
         BaseCondition baseSol = new BaseCondition("n == 1", "return 1");
-        BaseCondition baseSol2 = new BaseCondition("n == 0", "return 0");
-        
+        BaseCondition baseSol12 = new BaseCondition("n <= 0", "return 0");
+        BaseCondition baseSol2 = new BaseCondition("n == 1", "return 1");
+        BaseCondition baseSol22 = new BaseCondition("n <= 0", "return 0");
 
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+        baseAnswer.add(baseSol12);
+
+        recursiveAnswer2.add(recSol2);
+        baseAnswer2.add(baseSol2);
+        baseAnswer2.add(baseSol22);
 
         Solution sol = new Solution(baseAnswer,recursiveAnswer);
         Solution sol2 = new Solution(baseAnswer2,recursiveAnswer2);
@@ -298,9 +306,9 @@ public class ProblemLoader {
 
         upCodes.add("+ n");
         upCodes.add("+ 1");
-        upCodes.add("fibonacci(n - 1)");
-        upCodes.add("fibonacci(n - 2)");
-        upCodes.add("fibonacci(n)");
+        upCodes.add("+ fibonacci(n - 1)");
+        upCodes.add("+ fibonacci(n - 2)");
+        upCodes.add("+ fibonacci(n)");
 
 
         downCodes.add("n - 1");
@@ -318,6 +326,69 @@ public class ProblemLoader {
         String url = "/../img/Fibonacci.png";
         int points = 600;
         int difficulty = 3;
+
+
+
+        Problem fibonacci = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
+        this.dataService.addProblem(fibonacci);
+    }
+
+    public void addDigit(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+        List<BaseCondition> baseAnswer2 = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("n - 1", "+ fibonacci(n - 2)");
+        BaseCondition baseSol = new BaseCondition("n == 1", "return 1");
+        BaseCondition baseSol12 = new BaseCondition("n <= 0", "return 0");
+
+
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+        baseAnswer.add(baseSol12);
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
+;
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return True");
+        operations.add("return False");
+
+        conditions.add("n // 10 == d");
+        conditions.add("n % 10 == d");
+        conditions.add("n < 10");
+        conditions.add("n / 10 == d");
+        conditions.add("n > 10");
+
+
+        upCodes.add(" ");
+        upCodes.add("and (n % 10 == d)");
+        upCodes.add("and (n // 10 == d)");
+        upCodes.add("and (n / 10 == d)");
+
+        downCodes.add("n // 10, d");
+        downCodes.add("n % 10, d");
+        downCodes.add("n, d // 10");
+        downCodes.add("n, d % 10");
+
+
+
+        String title = "Contiene el Digito ?";
+        String statement = "Diseña una función contieneDigito(n, d) que devuelva True si el número n contiene el digito d. Dónde N es un entero positivo y d es un digito entre el 0 y el 9.";
+        String function = "contieneDigito";
+        String args = "n, d";
+        String url = "/../img/Digito.png";
+        int points = 200;
+        int difficulty = 1;
 
 
 
