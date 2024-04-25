@@ -60,6 +60,7 @@ public class R3controller {
             problemLoader.addPow();
             problemLoader.addDigit();
             problemLoader.addFibonacci();
+            problemLoader.addLength();
 
             init = true;
         }

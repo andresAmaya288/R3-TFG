@@ -431,6 +431,52 @@ public class R3RestController {
 
     ////////////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////
+
+    @PostMapping("/sol/longitudLista")
+    public ResponseEntity<Integer> solLen (@RequestBody String input){
+        int [] array = parseIntegerArray(input);
+        if(array != null){
+            return new ResponseEntity<>(array.length, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/sub/longitudLista")
+    public ResponseEntity<List<Integer>> subLen (@RequestBody Map<String,String> requestBody){
+
+        String input = requestBody.get("input");
+        String downCode = requestBody.get("downCode");
+
+        List<Integer> list  = parseIntegerList(input);
+        List<Integer> subpro = null;
+        boolean aux = true;
+        if(list != null){
+            switch (downCode){
+                case "l[0:]":
+                    subpro = new ArrayList<>(list.subList(0, list.size()));
+                    break;
+                case "l[:2]":
+                    subpro = new ArrayList<>(list.subList(0, 2));
+                    break;
+                case "l[1:]":
+                    subpro = new ArrayList<>(list.subList(1, list.size()));
+                    break;
+                case "l[:1]":
+                    subpro = new ArrayList<>(list.subList(0, 1));
+                    break;
+                default:
+                    aux = false;
+                    break;
+            }
+            if(aux){
+                return new ResponseEntity<>(subpro, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    ////////////////////////////////////////////////////////////////
     private static int[] parseIntegerArray(String input) {
         String[] numString = input.split(",");
 
@@ -449,4 +495,21 @@ public class R3RestController {
         return nums;
     }
 
+    private static List<Integer> parseIntegerList(String input) {
+        String[] numString = input.split(",");
+
+        // Crear un array para almacenar los enteros parseados
+        List<Integer> nums = new ArrayList<>();
+
+        // Parsear cada substring a un entero
+        for (int i = 0; i < numString.length; i++) {
+            try {
+                nums.add(Integer.parseInt(numString[i].trim()));
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+
+        return nums;
+    }
 }

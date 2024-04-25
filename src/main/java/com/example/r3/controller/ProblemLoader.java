@@ -396,4 +396,57 @@ public class ProblemLoader {
         this.dataService.addProblem(digit);
     }
 
+    public void addLength(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("l[1:]", "+ 1");
+        BaseCondition baseSol = new BaseCondition("not l", "return 0");
+
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return 0");
+        operations.add("return 1");
+        operations.add("return -1");
+
+        conditions.add("not l");
+        conditions.add("l[0] == null");
+        conditions.add("l[0] == 0");
+
+        upCodes.add("+ 1");
+        upCodes.add("- 1");
+        upCodes.add("+ 2");
+
+
+        downCodes.add("l[:1]");
+        downCodes.add("l[0:]");
+        downCodes.add("l[:2]");
+        downCodes.add("l[1:]");
+
+
+
+        String title = "Longitud Lista";
+        String statement = "Diseña una función longitudLista(l) para calcular la longitud de una lista de forma recursiva, dónde el parámetro l es una lista de enteros de la cual desconocemos la longitud. Además no será posible utilizar el método len(l)";
+        String function = "longitudLista";
+        String args = "l";
+        String url = "/../img/Longitud.png";
+        int points = 200;
+        int difficulty = 1;
+
+
+
+        Problem recursiveSumatory = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
+        this.dataService.addProblem(recursiveSumatory);
+    }
 }
