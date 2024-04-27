@@ -135,13 +135,13 @@ public class R3RestController {
     }
 
     @PostMapping("/sub/sumaLenta")
-    public ResponseEntity<String> subSlowAdd (@RequestBody Map<String,String> requestBody){
+    public ResponseEntity<List<Integer>> subSlowAdd (@RequestBody Map<String,String> requestBody){
 
         String input = requestBody.get("input");
         String downCode = requestBody.get("downCode");
 
         int [] array = parseIntegerArray(input);
-        String subpro = "";
+        List<Integer> subpro = new ArrayList<>();
         boolean aux = true;
         if(array != null){
             if (array.length == 2){
@@ -151,13 +151,16 @@ public class R3RestController {
                 if(a >= 0 && b >= 0){
                     switch (downCode){
                         case "a - 1, b":
-                            subpro = (a-1) + ", " + b;
+                            subpro.add(a - 1);
+                            subpro.add(b);
                             break;
                         case "a - 1, b - 1":
-                            subpro = (a-1) + ", " + (b-1);
+                            subpro.add(a - 1);
+                            subpro.add(b - 1);
                             break;
                         case "a, b - 1":
-                            subpro = a + ", " + (b-1);
+                            subpro.add(a);
+                            subpro.add(b - 1);
                             break;
                         default:
                             aux = false;
@@ -190,13 +193,13 @@ public class R3RestController {
     }
 
     @PostMapping("/sub/multiplication")
-    public ResponseEntity<String> subMultiplication (@RequestBody Map<String,String> requestBody){
+    public ResponseEntity<List<Integer>> subMultiplication (@RequestBody Map<String,String> requestBody){
 
         String input = requestBody.get("input");
         String downCode = requestBody.get("downCode");
 
         int [] array = parseIntegerArray(input);
-        String subpro = "";
+        List<Integer> subpro = new ArrayList<>();
         boolean aux = true;
         if(array != null){
             if (array.length == 2){
@@ -206,16 +209,20 @@ public class R3RestController {
                 if(a >= 0 && b >= 0){
                     switch (downCode){
                         case "a - 1, b":
-                            subpro = (a-1) + ", " + b;
+                            subpro.add(a - 1);
+                            subpro.add(b);
                             break;
                         case "a + 1, b":
-                            subpro = (a+1) + ", " + b;
+                            subpro.add(a + 1);
+                            subpro.add(b);
                             break;
                         case "a, b + 1":
-                            subpro = a + ", " + (b+1);
+                            subpro.add(a);
+                            subpro.add(b + 1);
                             break;
                         case "a, b - 1":
-                            subpro = a + ", " + (b-1);
+                            subpro.add(a);
+                            subpro.add(b - 1);
                             break;
                         default:
                             aux = false;
@@ -248,13 +255,13 @@ public class R3RestController {
     }
 
     @PostMapping("/sub/potenciaRecursiva")
-    public ResponseEntity<String> subRecPow (@RequestBody Map<String,String> requestBody){
+    public ResponseEntity<List<Integer>> subRecPow (@RequestBody Map<String,String> requestBody){
 
         String input = requestBody.get("input");
         String downCode = requestBody.get("downCode");
 
         int [] array = parseIntegerArray(input);
-        String subpro = "";
+        List<Integer> subpro = new ArrayList<>();
         boolean aux = true;
         if(array != null){
             if (array.length == 2){
@@ -264,22 +271,28 @@ public class R3RestController {
                 if(b >= 0 && e >= 0){
                     switch (downCode){
                         case "b, e - 1":
-                            subpro = b + ", " + (e - 1);
+                            subpro.add(b);
+                            subpro.add(e - 1);
                             break;
                         case "b, e + 1":
-                            subpro = b + ", " + (e + 1);
+                            subpro.add(b);
+                            subpro.add(e + 1);
                             break;
                         case "b, e // 2":
-                            subpro = b + ", " + (e / 2);
+                            subpro.add(b);
+                            subpro.add(e / 2);
                             break;
                         case "b - 1, e":
-                            subpro = (b - 1) + ", " + e;
+                            subpro.add(b - 1);
+                            subpro.add(e);
                             break;
                         case "b + 1, e":
-                            subpro = (b + 1) + ", " + e;
+                            subpro.add(b + 1);
+                            subpro.add(e);
                             break;
                         case "b // 2, e":
-                            subpro = (b / 2) + ", " + e;
+                            subpro.add(b / 2);
+                            subpro.add(e);
                             break;
                         default:
                             aux = false;
@@ -320,13 +333,13 @@ public class R3RestController {
     }
 
     @PostMapping("/sub/fibonacci")
-    public ResponseEntity<String> subFibonacci (@RequestBody Map<String,String> requestBody){
+    public ResponseEntity<Integer> subFibonacci (@RequestBody Map<String,String> requestBody){
 
         String input = requestBody.get("input");
         String downCode = requestBody.get("downCode");
 
         int [] array = parseIntegerArray(input);
-        String subpro = "";
+        Integer subpro = null;
         boolean aux = true;
         if(array != null){
             if (array.length == 1){
@@ -335,19 +348,19 @@ public class R3RestController {
                 if(n >= 0 ){
                     switch (downCode){
                         case "n - 1":
-                            subpro = String.valueOf(n - 1);
+                            subpro = n - 1;
                             break;
                         case "n - 2":
-                            subpro = String.valueOf(n - 2);
+                            subpro = n - 2;
                             break;
                         case "n":
-                            subpro = String.valueOf(n);
+                            subpro = n;
                             break;
                         case "n / 2":
-                            subpro = String.valueOf(n/2);
+                            subpro = n/2;
                             break;
                         case "n + 1":
-                            subpro = String.valueOf(n + 1);
+                            subpro = n + 1;
                             break;
                         default:
                             aux = false;
@@ -389,13 +402,13 @@ public class R3RestController {
     }
 
     @PostMapping("/sub/contieneDigit")
-    public ResponseEntity<String> subDigit (@RequestBody Map<String,String> requestBody){
+    public ResponseEntity<List<Integer>> subDigit (@RequestBody Map<String,String> requestBody){
 
         String input = requestBody.get("input");
         String downCode = requestBody.get("downCode");
 
         int [] array = parseIntegerArray(input);
-        String subpro = "";
+        List<Integer> subpro = new ArrayList<>();
         boolean aux = true;
         if(array != null){
             if (array.length == 2){
@@ -405,16 +418,20 @@ public class R3RestController {
                 if(n >= 0 && d <= 9 && d >= 0){
                     switch (downCode){
                         case "n, d // 10":
-                            subpro = n + ", " + (d / 10);
+                            subpro.add(n);
+                            subpro.add(d / 10);
                             break;
                         case "n, d % 10":
-                            subpro = n + ", " + (d % 10);
+                            subpro.add(n);
+                            subpro.add(d % 10);
                             break;
                         case "n // 10, d":
-                            subpro = (n / 10) + ", " + d;
+                            subpro.add(n / 10);
+                            subpro.add(d );
                             break;
                         case "n % 10, d":
-                            subpro = (n % 10) + ", " + d;
+                            subpro.add(n % 10);
+                            subpro.add(d);
                             break;
                         default:
                             aux = false;
@@ -428,8 +445,6 @@ public class R3RestController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-
-    ////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////
 
