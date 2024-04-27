@@ -492,6 +492,80 @@ public class R3RestController {
     }
 
     ////////////////////////////////////////////////////////////////
+    @PostMapping("/sol/esPrimo")
+    public ResponseEntity<Boolean> solPrime (@RequestBody String input){
+        int [] array = parseIntegerArray(input);
+        if(array != null){
+            if (array.length == 2){
+                int n = array[0];
+                int d = array[1];
+                if(n >= 0 && d <= 9 && d >= 0){
+                    boolean aux = true;
+                    int i = d;
+                    if (n <= 1) {
+                        aux = false;
+                    }
+                    while (i <= n / 2) {
+                        if (n % i == 0) {
+                            aux = false;
+                        }
+                        i++;
+                    }
+
+                    return new ResponseEntity<>(aux, HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/sub/esPrimo")
+    public ResponseEntity<List<Integer>> subPrime (@RequestBody Map<String,String> requestBody){
+
+        String input = requestBody.get("input");
+        String downCode = requestBody.get("downCode");
+
+        int [] array = parseIntegerArray(input);
+        List<Integer> subpro = new ArrayList<>();
+        boolean aux = true;
+        if(array != null){
+            if (array.length == 2){
+
+                int n = array[0];
+                int d = array[1];
+                if(n >= 0 && d <= 9 && d >= 0){
+                    switch (downCode){
+                        case "n, d + 1":
+                            subpro.add(n);
+                            subpro.add(d + 1);
+                            break;
+                        case "n, d + 2":
+                            subpro.add(n);
+                            subpro.add(d + 2);
+                            break;
+                        case "n + 1, d":
+                            subpro.add(n + 1);
+                            subpro.add(d);
+                            break;
+                        case "n + 2, d":
+                            subpro.add(n + 2);
+                            subpro.add(d);
+                            break;
+                        default:
+                            aux = false;
+                            break;
+                    }
+                    if(aux){
+                        return new ResponseEntity<>(subpro, HttpStatus.OK);
+                    }
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    ////////////////////////////////////////////////////////////////
+
     private static int[] parseIntegerArray(String input) {
         String[] numString = input.split(",");
 

@@ -449,4 +449,62 @@ public class ProblemLoader {
                 function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
         this.dataService.addProblem(recursiveSumatory);
     }
+
+    public void addPrime(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("n, d + 1", " ");
+        BaseCondition baseSol = new BaseCondition("d * d > n", "return True");
+        BaseCondition baseSol2= new BaseCondition("n % d == 0", "return False");
+
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+        baseAnswer.add(baseSol2);
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return True");
+        operations.add("return False");
+
+        conditions.add("2 * d > n");
+        conditions.add("n / d == 0");
+        conditions.add("n % d == 0");
+        conditions.add("d * d > n");
+
+
+
+        upCodes.add(" ");
+        upCodes.add("and n / d == 0");
+        upCodes.add("and not n / d == 0");
+
+
+        downCodes.add("n, d + 1");
+        downCodes.add("n, d + 2");
+        downCodes.add("n + 2, d");
+        downCodes.add("n + 1, d");
+
+
+
+        String title = "Número Primo";
+        String statement = "Crea una función llamada esPrimo(n, d) que verifica si un número n es primo, empezando a comprobar su divisibilidad desde d.Los parámetros de entrada siempre serán enteros positivos, y se garantiza que d será menor que n y mayor que 1";
+        String function = "esPrimo";
+        String args = "n, d";
+        String url = "/../img/Primo.png";
+        int points = 600;
+        int difficulty = 3;
+
+
+
+        Problem recursiveSumatory = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
+        this.dataService.addProblem(recursiveSumatory);
+    }
 }
