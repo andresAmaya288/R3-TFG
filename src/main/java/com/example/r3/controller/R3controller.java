@@ -45,6 +45,7 @@ public class R3controller {
     public String problem (Model model, HttpServletRequest request, @PathVariable String id){
         Long idLong = Long.parseLong(id);
         model.addAttribute("problem",this.dataService.getProblem(idLong));
+        model.addAttribute("problems",this.dataService.getProblemValues());
         return "problem";
     }
 

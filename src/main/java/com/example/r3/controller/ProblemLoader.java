@@ -381,7 +381,7 @@ public class ProblemLoader {
 
 
 
-        String title = "Contiene Digito?";
+        String title = "Contiene Digito";
         String statement = "Diseña una función contieneDigito(n, d) que devuelva True si el número n contiene el digito d. Dónde N es un entero positivo y d es un digito entre el 0 y el 9.";
         String function = "contieneDigito";
         String args = "n, d";
