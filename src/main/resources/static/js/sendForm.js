@@ -70,9 +70,9 @@ function submitForm() {
 
             var element = document.getElementById("solutionFeedback");
             if (data === true) {
-                element.innerHTML = '<a style="font-weight: bold; color: green;">Congratulations!!</a> You have solved the problem';
+                element.innerHTML = '<a style="font-weight: bold; color: green;">Enhorabuena!!</a> has resuelto el problema';
             } else {
-                element.innerHTML = '<a style="font-weight: bold; color: red;">X</a> Oops, it seems you have failed the problem, you can try again';
+                element.innerHTML = '<a style="font-weight: bold; color: red;">X</a> Uups, parece que has fallado, pero puedes intentarlo de nuevo!';
             }
         })
         .catch(function(error) {

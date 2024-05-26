@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -506,7 +507,7 @@ public class R3RestController {
                         aux = false;
                     }
                     while (i <= n / 2) {
-                        if (n % i == 0) {
+                        if(n % i == 0) {
                             aux = false;
                         }
                         i++;
@@ -566,13 +567,121 @@ public class R3RestController {
 
     ////////////////////////////////////////////////////////////////
 
+    @PostMapping("/sol/intercalar")
+    public ResponseEntity<List <Integer>> solInterleave (@RequestBody Map<String,String> requestBody){
+        String input1 = requestBody.get("input1");
+        String input2 = requestBody.get("input2");
+        List<Integer> list1 = parseIntegerList(input1);
+        List<Integer> list2 = parseIntegerList(input2);
+        List <Integer> sol = new ArrayList<>();
+        if(list1 != null && list2 != null){
+            int maxLen = Math.max(list1.size(), list2.size());
+            for (int i = 0; i < maxLen; i++) {
+                if (i < list1.size()) {
+                    sol.add(list1.get(i));
+                }
+                if (i < list2.size()) {
+                    sol.add(list2.get(i));
+                }
+            }
+
+            return new ResponseEntity<>(sol, HttpStatus.OK);
+
+        }else if(list1 != null){
+            return new ResponseEntity<>(list1, HttpStatus.OK);
+
+        }else if(list2 != null){
+            return new ResponseEntity<>(list2, HttpStatus.OK);
+
+        }
+
+
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/sub/intercalar")
+    public ResponseEntity<Map<String, List<Integer>>> subInterleave (@RequestBody Map<String,String> requestBody){
+
+        String input1 = requestBody.get("input1");
+        String input2 = requestBody.get("input2");
+        String downCode = requestBody.get("downCode");
+
+        List<Integer> a  = parseIntegerList(input1);
+        List<Integer> b  = parseIntegerList(input2);
+        List<Integer> sol1  = new ArrayList<>();
+        List<Integer> sol2  = new ArrayList<>();
+        Map<String, List<Integer>> subpro = new HashMap<>();
+        boolean aux = true;
+        if(a != null && b != null){
+            switch (downCode) {
+                case "+ intercalar(a[0:],b[1:])":
+                    sol1 = new ArrayList<>(a);
+                    sol2 = new ArrayList<>(b.subList(1, b.size()));
+                    break;
+                case "+ intercalar(a[1:],b[0:])":
+                    sol1 = new ArrayList<>(a.subList(1, a.size()));
+                    sol2 = new ArrayList<>(b);
+                    break;
+                case "+ intercalar(a[1:],b[1:])":
+                    sol1 = new ArrayList<>(a.subList(1, a.size()));
+                    sol2 = new ArrayList<>(b.subList(1, b.size()));
+                    break;
+                case "+ intercalar(a[0:],b[0:])":
+                    sol1 = new ArrayList<>(a);
+                    sol2 = new ArrayList<>(b);
+                    break;
+                default:
+                    aux = false;
+                    break;
+            }
+        } else if (a == null && b != null) {
+            switch (downCode) {
+                case "+ intercalar(a[0:],b[1:])":
+                case "+ intercalar(a[1:],b[1:])":
+                    sol2 = new ArrayList<>(b.subList(1, b.size()));
+                    break;
+                case "+ intercalar(a[1:],b[0:])":
+                case "+ intercalar(a[0:],b[0:])":
+                    sol2 = new ArrayList<>(b);
+                    break;
+                default:
+                    aux = false;
+                    break;
+            }
+        } else if (a != null && b == null) {
+            switch (downCode) {
+                case "+ intercalar(a[0:],b[1:])":
+                case "+ intercalar(a[0:],b[0:])":
+                    sol1 = new ArrayList<>(a);
+                    break;
+                case "+ intercalar(a[1:],b[1:])":
+                case "+ intercalar(a[1:],b[0:])":
+                    sol1 = new ArrayList<>(a.subList(1, a.size()));
+                    break;
+                default:
+                    aux = false;
+                    break;
+            }
+        }else {
+            aux = false;
+        }
+
+        if (aux) {
+            subpro.put("sol1", sol1);
+            subpro.put("sol2", sol2);
+            return new ResponseEntity<>(subpro, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    ////////////////////////////////////////////////////////////////
     private static int[] parseIntegerArray(String input) {
         String[] numString = input.split(",");
 
-        // Crear un array para almacenar los enteros parseados
         int[] nums = new int[numString.length];
 
-        // Parsear cada substring a un entero
         for (int i = 0; i < numString.length; i++) {
             try {
                 nums[i] = Integer.parseInt(numString[i].trim());
@@ -587,10 +696,8 @@ public class R3RestController {
     private static List<Integer> parseIntegerList(String input) {
         String[] numString = input.split(",");
 
-        // Crear un array para almacenar los enteros parseados
         List<Integer> nums = new ArrayList<>();
 
-        // Parsear cada substring a un entero
         for (int i = 0; i < numString.length; i++) {
             try {
                 nums.add(Integer.parseInt(numString[i].trim()));

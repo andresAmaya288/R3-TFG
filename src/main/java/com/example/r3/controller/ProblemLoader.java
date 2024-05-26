@@ -507,4 +507,61 @@ public class ProblemLoader {
                 function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
         this.dataService.addProblem(recursiveSumatory);
     }
+
+    public void addInterLeave(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("+ intercalar(a[1:],b[1:])", "[a[0]] + [b[0]]");
+        BaseCondition baseSol = new BaseCondition("len(a) == 1", "return [a[0],b[0]]");
+
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return [a[1],b[1]]");
+        operations.add("return [a[0],b[1]]");
+        operations.add("return [a[0],b[0]]");
+        operations.add("return [a[1],b[0]]");
+
+        conditions.add("len(a) == 1");
+        conditions.add("len(a) == 0");
+        conditions.add("len(a) != 1");
+        conditions.add("len(a) != 0");
+
+
+        downCodes.add("+ intercalar(a[0:],b[1:])");
+        downCodes.add("+ intercalar(a[1:],b[1:])");
+        downCodes.add("+ intercalar(a[1:],b[0:])");
+        downCodes.add("+ intercalar(a[0:],b[0:])");
+
+        upCodes.add("[a[1]] + [b[1]]");
+        upCodes.add("[a[0]] + [b[0]]");
+        upCodes.add("[a[0]] + [b[1]]");
+        upCodes.add("[a[1]] + [b[0]]");
+
+
+
+        String title = "Intercalar";
+        String statement = "Crea una función llamada intercalar(a, b) que intercala las listas a y b, intercalando los valores, enteros positivos de una lista y otra";
+        String function = "intercalar";
+        String args = "a, b";
+        String url = "/../img/Intercalar.png";
+        int points = 600;
+        int difficulty = 3;
+
+
+
+        Problem recursiveSumatory = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
+        this.dataService.addProblem(recursiveSumatory);
+    }
 }
