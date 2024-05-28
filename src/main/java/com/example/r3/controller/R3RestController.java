@@ -677,6 +677,64 @@ public class R3RestController {
     }
 
     ////////////////////////////////////////////////////////////////
+
+    @PostMapping("/sol/paresImpares")
+    public ResponseEntity<Map<String, List<Integer>>>  solEvenOdds (@RequestBody String input){
+        List<Integer> list = parseIntegerList(input);
+        List<Integer> sol1  = new ArrayList<>();
+        List<Integer> sol2  = new ArrayList<>();
+        Map<String, List<Integer>> sol = new HashMap<>();
+
+        if (list != null) {
+            for (int i = 0; i < list.size(); i++) {
+                if (i % 2 == 0) {
+                    sol1.add(list.get(i));
+                } else {
+                    sol2.add(list.get(i));
+                }
+            }
+
+            sol.put("sol1", sol1);
+            sol.put("sol2", sol2);
+            return new ResponseEntity<>(sol, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/sub/paresImpares")
+    public  ResponseEntity<List<Integer>> subEvenOdds (@RequestBody Map<String,String> requestBody){
+
+        String input = requestBody.get("input");
+        String downCode = requestBody.get("downCode");
+
+        List<Integer> list  = parseIntegerList(input);
+        List<Integer> subpro = new ArrayList<>();
+        boolean aux = true;
+        if(list != null){
+            switch (downCode){
+                case "a[0:]":
+                    subpro = new ArrayList<>(list.subList(0, list.size()));
+                    break;
+                case "a[1:]":
+                    subpro = new ArrayList<>(list.subList(1, list.size()));
+                    break;
+                case "a[2:]":
+                    subpro = new ArrayList<>(list.subList(2, list.size()));
+                    break;
+                default:
+                    aux = false;
+                    break;
+            }
+            if(aux){
+                return new ResponseEntity<>(subpro, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    ////////////////////////////////////////////////////////////////
+
     private static int[] parseIntegerArray(String input) {
         String[] numString = input.split(",");
 

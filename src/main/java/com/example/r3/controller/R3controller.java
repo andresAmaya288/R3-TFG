@@ -46,10 +46,16 @@ public class R3controller {
         Long idLong = Long.parseLong(id);
         model.addAttribute("problem",this.dataService.getProblem(idLong));
         model.addAttribute("problems",this.dataService.getProblemValues());
-        if (this.dataService.getProblem(idLong).getTitle() == "Intercalar"){
-            return "problemInterleave";
-        }else {
-            return "problem";
+
+        switch (this.dataService.getProblem(idLong).getTitle()){
+
+            case "Intercalar":
+                return "problemInterleave";
+            case "Pares e Impares":
+                return "problemEvenOdds";
+            default:
+                return "problem";
+
         }
     }
 
@@ -68,6 +74,7 @@ public class R3controller {
             problemLoader.addLength();
             problemLoader.addPrime();
             problemLoader.addInterLeave();
+            problemLoader.addEvenOdds();
             init = true;
         }
     }

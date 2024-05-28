@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Shop Item - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/../img/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/../css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+<!-- Navigation-->
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand text-white" href="/">R3</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Problemas</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {{#problems}}
+                        <li><a class="dropdown-item" href="/problem/{{id}}">{{title}}</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        {{/problems}}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Product section-->
+{{#problem}}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
+                <footer class="py-5 bg-dark">
+                    <div id="pythonCode" class="m-0 text-left text-white">
+                                        <pre>
+def {{function}}({{args}}):
+    if <a id="conditionPy">Condition</a>:
+        return <a id="operationPy">Operation</a>
+<div id="addBaseCase" style="display: none;">
+    elif <a id="conditionPyI">Condition</a>:
+	    return <a id="operationPyI">Operation</a>
+</div>
+<div id="addRecursiveCase" style="display: none;">
+    elif <a id="recConditionPyI">recConditionI</a>
+        (a1,a2) = {{function}}(<a id="downCodePyI">Operation_downI</a>)
+	    return <a id="upCodePyI">Operation_upI</a>
+</div>
+    else:
+       (a1,a2) = {{function}}(<a id="downCodePy">Operation_down</a>)
+       return <a id="upCodePy">Operation_up</a>
+                                        </pre>
+                    </div>
+                </footer>
+            </div>
+            <div class="col-md-6">
+                <h1 class="display-5 fw-bolder">{{title}}</h1>
+                <div class="fs-5 mb-5">
+                    <span>{{points}} pts</span>
+                    <div class="d-flex justify-content-left small text-warning mb-2">
+                        {{#fullStars}}
+                        <div class="bi-star-fill"></div>
+                        {{/fullStars}}
+                        {{#emptyStars}}
+                        <div class="bi-star"></div>
+                        {{/emptyStars}}
+                    </div>
+                </div>
+
+                <p class="lead">{{statement}}</p>
+                <div>
+                    <form id="proForm" action="/problem/{{id}}/solution">
+                        <input type="hidden" id="proId" value="{{id}}">
+                        <input type="hidden" id="apiSolUrl" value="/api/sol/{{function}}">
+                        <input type="hidden" id="apiSubUrl" value="/api/sub/{{function}}">
+
+                        <h4 class="form-control-plaintext">Caso Base</h4>
+                        <div class="card" id="baseCase">
+                            <label class="form-label"  for="condition">Condición:</label>
+                            <select class="form-select" id="condition" name="condition">
+                                <option value="...">...</option>
+                                {{#conditions}}
+                                <option value="{{.}}">{{.}}</option>
+                                {{/conditions}}
+
+                            </select>
+
+                            <label class="form-label"  for="operation">Operación:</label>
+                            <select class="form-select" id="operation" name="operation">
+                                <option value="...">...</option>
+                                {{#operations}}
+                                <option value="{{.}}">{{.}}</option>
+                                {{/operations}}
+                            </select>
+                        </div>
+                        <button class="btn btn-outline-dark" type="button" onclick='duplicateBaseCase()'>Agregar Caso Base</button>
+                        <button class="btn btn-outline-dark" type="button" onclick='eliminateBaseCase()'>Eliminar Caso Base</button>
+
+                        <h4 class="form-control-plaintext">Caso Recursivo</h4>
+                        <div class="card" id="recursiveCase">
+                            <label type="hidden" id="recConditionLabel" class="form-label"  for="recCondition" hidden>Recursive Condition</label>
+                            <select type="hidden" class="form-select" id="recCondition" name="condition" hidden>
+                                <option value="...">...</option>
+                                {{#conditions}}
+                                <option value="{{.}}">{{.}}</option>
+                                {{/conditions}}
+                            </select>
+
+                            <div style="display: flex; justify-content: center;">
+                                <div style="margin-right: 20px;">
+                                    <label>Input:</label><br>
+                                    <input type="text" id="input" name="input"><br><br><br>
+
+                                    <label class="form-label"  for="downCode">Operación (Abajo):</label>
+                                    <select class="form-select" id="downCode" name="downCode">
+                                        <option value="...">...</option>
+                                        {{#downCodes}}
+                                        <option value="{{.}}">{{.}}</option>
+                                        {{/downCodes}}
+                                    </select><br>
+
+                                    <label>Subproblema:</label><br>
+                                    <div id="subproblem" class="card">SubPro1</div>
+                                </div>
+
+                                <div>
+                                    <label>Solución:</label><br>
+                                    <div id="solution1" style="margin-top: 4px;" class="card">A1</div>
+                                    <div id="solution2" style="margin-top: 4px;" class="card">A2</div><br>
+
+                                    <label class="form-label"  for="upCode">Operación (Arriba):</label>
+                                    <select class="form-select" id="upCode" name="upCode">
+                                        <option value="...">...</option>
+                                        {{#upCodes}}
+                                        <option value="{{.}}">{{.}}</option>
+                                        {{/upCodes}}
+                                    </select><br>
+
+                                    <label>Subsolución:</label><br>
+                                    <div id="subsolution1" class="card">Subsol</div>
+                                    <div id="subsolution2" class="card">Subsol</div><br><br>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-dark" type="button" onclick='duplicateRecursiveCase()'>Agregar Caso Recursivo</button>
+                            <button class="btn btn-outline-dark" type="button" onclick='eliminateRecursiveCase()'>Eliminar Caso Recursivo</button>
+                        </div>
+                        <button class="btn btn-outline-dark" type="submit">Resolver</button>
+                    </form>
+                    <div id="solutionFeedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{/problem}}
+
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/../js/scripts.js"></script>
+<script src="/../js/pythonCode.js"></script>
+<script src="/../js/sendForm.js"></script>
+<script src="/../js/diagramEvenOdds.js"></script>
+<script src="/../js/duplicateForms.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+</body>
+</html>

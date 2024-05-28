@@ -337,8 +337,7 @@ public class ProblemLoader {
     public void addDigit(){
         List<BaseCondition> baseAnswer = new ArrayList<>();
         List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
-        List<BaseCondition> baseAnswer2 = new ArrayList<>();
-        List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
+
 
         RecursiveCondition recSol = new RecursiveCondition("n // 10, d", " ");
         BaseCondition baseSol = new BaseCondition("n % 10 == d", "return True");
@@ -512,8 +511,8 @@ public class ProblemLoader {
         List<BaseCondition> baseAnswer = new ArrayList<>();
         List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
 
-        RecursiveCondition recSol = new RecursiveCondition("+ intercalar(a[1:],b[1:])", "[a[0]] + [b[0]]");
-        BaseCondition baseSol = new BaseCondition("len(a) == 1", "return [a[0],b[0]]");
+        RecursiveCondition recSol = new RecursiveCondition("+ intercalar(a[1:], b[1:])", "[a[0]] + [b[0]]");
+        BaseCondition baseSol = new BaseCondition("len(a) == 1", "return [a[0], b[0]]");
 
         recursiveAnswer.add(recSol);
         baseAnswer.add(baseSol);
@@ -527,10 +526,10 @@ public class ProblemLoader {
         List<String> upCodes = new ArrayList<>();
         List<String> downCodes = new ArrayList<>();
 
-        operations.add("return [a[1],b[1]]");
-        operations.add("return [a[0],b[1]]");
-        operations.add("return [a[0],b[0]]");
-        operations.add("return [a[1],b[0]]");
+        operations.add("return [a[1], b[1]]");
+        operations.add("return [a[0], b[1]]");
+        operations.add("return [a[0], b[0]]");
+        operations.add("return [a[1], b[0]]");
 
         conditions.add("len(a) == 1");
         conditions.add("len(a) == 0");
@@ -538,10 +537,10 @@ public class ProblemLoader {
         conditions.add("len(a) != 0");
 
 
-        downCodes.add("+ intercalar(a[0:],b[1:])");
-        downCodes.add("+ intercalar(a[1:],b[1:])");
-        downCodes.add("+ intercalar(a[1:],b[0:])");
-        downCodes.add("+ intercalar(a[0:],b[0:])");
+        downCodes.add("+ intercalar(a[0:], b[1:])");
+        downCodes.add("+ intercalar(a[1:], b[1:])");
+        downCodes.add("+ intercalar(a[1:], b[0:])");
+        downCodes.add("+ intercalar(a[0:], b[0:])");
 
         upCodes.add("[a[1]] + [b[1]]");
         upCodes.add("[a[0]] + [b[0]]");
@@ -555,8 +554,8 @@ public class ProblemLoader {
         String function = "intercalar";
         String args = "a, b";
         String url = "/../img/Intercalar.png";
-        int points = 600;
-        int difficulty = 3;
+        int points = 800;
+        int difficulty = 4;
 
 
 
@@ -564,4 +563,65 @@ public class ProblemLoader {
                 function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
         this.dataService.addProblem(recursiveSumatory);
     }
+
+    public void addEvenOdds(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("a[2:]", "([a[0]] + a1, [a[1]] + a2)");
+        BaseCondition baseSol = new BaseCondition("len(a) == 1", "return (a[0], [])");
+        BaseCondition baseSol2= new BaseCondition("len(a) == 0", "return ([], [])");
+
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+        baseAnswer.add(baseSol2);
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return (a[0], [])");
+        operations.add("return ([], a[0])");
+        operations.add("return ([], [])");
+        operations.add("return (a[1], [])");
+
+        conditions.add("len(a) == 1");
+        conditions.add("len(a) == 0");
+        conditions.add("len(a) != 1");
+        conditions.add("len(a) != 0");
+
+
+        downCodes.add("a[1:]");
+        downCodes.add("a[2:]");
+        downCodes.add("a[0:]");
+
+
+        upCodes.add("([a[0]] + a1, [a[1]] + a2)");
+        upCodes.add("(a[0] + a1, a[1] + a2)");
+        upCodes.add("([a[1]] + a1, [a[0]] + a1)");
+        upCodes.add("(a[0] + a1, a[1] + a1)");
+
+
+
+
+        String title = "Pares e Impares";
+        String statement = "Crea una función llamada paresImpares(a) que divide la lista de enteros positivos a en 2 listas a1 y a2 conteniendo la primera los elementos con índice par y a2 los restantes";
+        String args = "a";
+        String function = "paresImpares";
+        String url = "/../img/ParesImpares.png";
+        int points = 800;
+        int difficulty = 4;
+
+
+
+        Problem newProblem = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols);
+        this.dataService.addProblem(newProblem);
+    }
+
 }
