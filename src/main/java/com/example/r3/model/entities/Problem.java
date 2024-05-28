@@ -20,6 +20,8 @@ public class Problem {
     String args;
     String urlImg;
 
+    String extraFunction1;
+    String extraFunction2;
     int points;
     int difficulty;
 
@@ -65,6 +67,28 @@ public class Problem {
         this.emptyStars = new char [5 - difficulty];
         this.fullStars = new char [difficulty];
 
+    }
+
+    public Problem(String title, String statement, String function, String args, String urlImg,
+                   int points, int difficulty, List<String> operations,
+                   List<String> conditions, List<String> upCodes,
+                   List<String> downCodes, List<Solution> solutions,String extraFunction1, String extraFunction2) {
+        this.title = title;
+        this.statement = statement;
+        this.function = function;
+        this.args = args;
+        this.urlImg = urlImg;
+        this.points = points;
+        this.difficulty = difficulty;
+        this.operations = operations;
+        this.conditions = conditions;
+        this.upCodes = upCodes;
+        this.downCodes = downCodes;
+        this.solutions = solutions;
+        this.emptyStars = new char [5 - difficulty];
+        this.fullStars = new char [difficulty];
+        this.extraFunction1 = extraFunction1;
+        this.extraFunction2 = extraFunction2;
     }
 
     public long getId() {
@@ -199,5 +223,29 @@ public class Problem {
 
     public void setFullStars(char[] fullStars) {
         this.fullStars = fullStars;
+    }
+
+    public String getExtraFunction1() {
+        return extraFunction1;
+    }
+
+    public void setExtraFunction1(String extraFunction1) {
+        this.extraFunction1 = extraFunction1;
+    }
+
+    public String getExtraFunction2() {
+        return extraFunction2;
+    }
+
+    public void setExtraFunction2(String extraFunction2) {
+        this.extraFunction2 = extraFunction2;
+    }
+
+    public List<Solution> getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(List<Solution> solutions) {
+        this.solutions = solutions;
     }
 }

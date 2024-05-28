@@ -624,4 +624,82 @@ public class ProblemLoader {
         this.dataService.addProblem(newProblem);
     }
 
+    public void addRevPerm(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+        List<BaseCondition> baseAnswer2 = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
+
+        RecursiveCondition recSol = new RecursiveCondition("paresImpares(a)", "inBitPerm(a1) + inBitPerm(a2)");
+        RecursiveCondition recSol2 = new RecursiveCondition("inBitPerm(a[:len(a) // 2]), inBitPerm(a[len(a) // 2:])", "interleave(a1, a2)");
+        BaseCondition baseSol = new BaseCondition("len(a) <= 2", "return a");
+        BaseCondition baseSol2 = new BaseCondition("len(a) <= 2", "return a");
+
+
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+
+        recursiveAnswer2.add(recSol2);
+        baseAnswer2.add(baseSol2);
+
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+        Solution sol2 = new Solution(baseAnswer2,recursiveAnswer2);
+
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
+        sols.add(sol2);
+
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return a");
+        operations.add("return a[1:]");
+        operations.add("not a[:1]");
+        operations.add("return len(a)");
+
+        conditions.add("len(a) < 1");
+        conditions.add("len(a) <= 1");
+        conditions.add("len(a) <= 2");
+        conditions.add("len(a) < 2");
+
+
+        downCodes.add("paresImpares(a)");
+        downCodes.add("inBitPerm(a[:len(a) // 2]), inBitPerm(a[len(a) // 2:])");
+
+        upCodes.add("interleave(a1, a2)");
+        upCodes.add("inBitPerm(a1) + inBitPerm(a2)");
+
+
+        String title = "Permutación de Inversión de Bits";
+        String statement = "Desarrolla la función inBitPerm(a) que realice la permutación de inversión de bits en la lista de enteros a, utilizando las funciones paresImpares(a) para dividir la lista en índices pares e impares, e intercalar(a, b) para intercalar dos listas.";
+        String args = "a";
+        String function = "inBitPerm";
+        String url = "/../img/InvertirPermutar.png";
+        String extraFunction1 = "def intercalar(a, b):\n" +
+                "    if len(a) == 1:\n" +
+                "        return [a[0], b[0]]\n" +
+                "    else:\n" +
+                "        return [a[0]] + [b[0]] + intercalar(a[1:], b[1:])";
+        String extrafuncion2 = "def paresImpares(a):\n" +
+                "    if len(a) == 1:\n" +
+                "        return (a[0], [])\n" +
+                "    elif len(a) == 0:\n" +
+                "        return ([], [])\n" +
+                "    else:\n" +
+                "        (a1,a2) = paresImpares(a[2:])\n" +
+                "        return ([a[0]] + a1, [a[1]] + a2)";;
+        int points = 600;
+        int difficulty = 3;
+
+
+
+        Problem newProblem = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols,extraFunction1,extrafuncion2);
+        this.dataService.addProblem(newProblem);
+    }
+
 }

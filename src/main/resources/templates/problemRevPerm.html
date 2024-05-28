@@ -64,10 +64,12 @@ def {{function}}({{args}}):
 </div>
 <div id="addRecursiveCase" style="display: none;">
     elif <a id="recConditionPyI">recConditionI</a>
-	    return {{function}}(<a id="downCodePyI">Operation_downI</a>) <a id="upCodePyI">Operation_upI</a>
+        (a1,a2) = <a id="downCodePyI">Operation_downI</a>
+	    return <a id="upCodePyI">Operation_upI</a>
 </div>
     else:
-        return {{function}}(<a id="downCodePy">Operation_down</a>) <a id="upCodePy">Operation_up</a>
+        (a1,a2) = <a id="downCodePy">Operation_down</a>
+        return <a id="upCodePy">Operation_up</a>
                                         </pre>
                     </div>
                 </footer>
@@ -138,8 +140,9 @@ def {{function}}({{args}}):
                                         {{/downCodes}}
                                     </select><br>
 
-                                    <label for="subproblem">Subproblema:</label><br>
-                                    <div id="subproblem" class="card">SubPro</div><br><br>
+                                    <label>Subproblema:</label><br>
+                                    <div id="subproblem1" class="card">SubPro1</div>
+                                    <div id="subproblem2" class="card">SubProB</div><br>
                                 </div>
 
                                 <div>
@@ -154,14 +157,11 @@ def {{function}}({{args}}):
                                         {{/upCodes}}
                                     </select><br>
 
-                                    <label for="subsolution">Subsolución:</label><br>
-                                    <div id="subsolution" class="card">Subsol</div><br><br>
+                                    <label>Subsolución:</label><br>
+                                    <div id="subsolution1" class="card">Subsol</div>
+                                    <div id="subsolution2" class="card">Subsol</div><br><br>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <button class="btn btn-outline-dark" type="button" onclick='duplicateRecursiveCase()'>Agregar Caso Recursivo</button>
-                            <button class="btn btn-outline-dark" type="button" onclick='eliminateRecursiveCase()'>Eliminar Caso Recursivo</button>
                         </div>
                         <button class="btn btn-outline-dark" type="submit">Resolver</button>
                     </form>
@@ -184,7 +184,7 @@ def {{function}}({{args}}):
 <script src="/../js/pythonCode.js"></script>
 <script src="/../js/sendForm.js"></script>
 <script src="/../js/diagram.js"></script>
-<script src="/../js/duplicateForms.js"></script>
+<script src="/../js/diagramRevPerm.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
 
 </body>

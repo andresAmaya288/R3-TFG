@@ -53,6 +53,8 @@ public class R3controller {
                 return "problemInterleave";
             case "Pares e Impares":
                 return "problemEvenOdds";
+            case "Permutación de Inversión de Bits":
+                return "problemRevPerm";
             default:
                 return "problem";
 
@@ -75,6 +77,7 @@ public class R3controller {
             problemLoader.addPrime();
             problemLoader.addInterLeave();
             problemLoader.addEvenOdds();
+            problemLoader.addRevPerm();
             init = true;
         }
     }
