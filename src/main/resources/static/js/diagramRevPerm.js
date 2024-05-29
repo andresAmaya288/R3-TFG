@@ -1,4 +1,4 @@
-function getSolution(source,destiny1, destiny2) {
+function getSolution(source,destiny) {
 
     var initialValue = document.getElementById(source).value;
     var url = document.getElementById("apiSolUrl").value;
@@ -30,11 +30,7 @@ function getSolution(source,destiny1, destiny2) {
         .then(function(data) {
             console.log('Response body:', data);
 
-            var valueA = data.sol1;
-            var valueB = data.sol2;
-
-            document.getElementById(destiny1).textContent = valueA;
-            document.getElementById(destiny2).textContent = valueB;
+            document.getElementById(destiny).textContent = data;
 
 
         })
@@ -44,10 +40,11 @@ function getSolution(source,destiny1, destiny2) {
 
 }
 
-function getSubproblem(source, code, destinyA, destinyB, destiny2A,destiny2B) {
+function getSubproblem(source, code, destinyA, destinyB, destiny2A, destiny2B) {
     var downCode = document.getElementById(code).value;
     var input = document.getElementById(source).value;
     var url = document.getElementById("apiSubUrl").value;
+    var url2 = document.getElementById("apiSolUrl").value;
 
     var data = {
         input: input,
@@ -63,16 +60,13 @@ function getSubproblem(source, code, destinyA, destinyB, destiny2A,destiny2B) {
     };
 
     fetch(url, options)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            } else {
+        .then(response => {
+            if (!response.ok) {
                 throw new Error('Error submitting form. Response status: ' + response.status);
             }
+            return response.json();
         })
-        .then(function (data) {
-            console.log('Response body:', data);
-
+        .then(data => {
             console.log('Response body:', data);
 
             var valueA = data.sol1;
@@ -81,48 +75,62 @@ function getSubproblem(source, code, destinyA, destinyB, destiny2A,destiny2B) {
             document.getElementById(destinyA).textContent = valueA;
             document.getElementById(destinyB).textContent = valueB;
 
-
-            var initialValue = document.getElementById(destiny).textContent;
+            var data2 =  valueA;
 
             var options2 = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data2)
+                body: data2
             };
 
-            fetch(url2, options2)
-                .then(function (response2) {
-                    if (response2.ok) {
-                        return response2.json();
-                    } else {
-                        throw new Error('Error submitting form. Response status: ' + response2.status);
-                    }
-                })
-                .then(function (data2) {
-                    console.log('Response body:', data2);
-                    var valueA = data2.sol1;
-                    var valueB = data2.sol2;
-
-                    document.getElementById(destiny2A).textContent = valueA;
-                    document.getElementById(destiny2B).textContent = valueB;
-                })
-                .catch(function (error) {
-                    console.error('There was a problem with the fetch request:', error.message);
-                });
+            return fetch(url2, options2);
         })
-        .catch(function (error) {
+        .then(response2 => {
+            if (!response2.ok) {
+                throw new Error('Error submitting form. Response status: ' + response2.status);
+            }
+            return response2.json();
+        })
+        .then(data2 => {
+            console.log('Response body:', data2);
+            document.getElementById(destiny2A).textContent = data2;
+            valueB = document.getElementById(destinyB).textContent;
+
+            var data3 =  valueB;
+
+            var options3 = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data3
+            };
+
+            return fetch(url2, options3);
+        })
+        .then(response3 => {
+            if (!response3.ok) {
+                throw new Error('Error submitting form. Response status: ' + response3.status);
+            }
+            return response3.json();
+        })
+        .then(data3 => {
+            console.log('Response body:', data3);
+            document.getElementById(destiny2B).textContent = data3;
+        })
+        .catch(error => {
             console.error('There was a problem with the fetch request:', error.message);
         });
 }
 
 
 document.getElementById("input").addEventListener("change", function() {
-    getSolution('input','solution1','solution2');
-    getSubproblem('input', 'downCode','subproblem','subsolution1','subsolution2');
+    getSolution('input','solution',);
+    getSubproblem('input', 'downCode','subproblem1', 'subproblem2','subsolution1','subsolution2');
 });
 
 document.getElementById("downCode").addEventListener("change", function() {
-    getSubproblem('input', 'downCode','subproblem','subsolution1','subsolution2');
+    getSubproblem('input', 'downCode','subproblem1', 'subproblem2','subsolution1','subsolution2');
 });

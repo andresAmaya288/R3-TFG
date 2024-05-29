@@ -731,18 +731,19 @@ public class R3RestController {
     }
 
     ////////////////////////////////////////////////////////////////
-    @PostMapping("/sol/paresImpares")
+    @PostMapping("/sol/inBitPerm")
     public ResponseEntity<List<Integer>>  solInBitPerm(@RequestBody String input){
         List<Integer> list = parseIntegerList(input);
 
         if (list != null) {
-            return new ResponseEntity<>(invbitperm(list), HttpStatus.OK);
+            List<Integer> subpro = invbitperm(list);
+            return new ResponseEntity<>(subpro, HttpStatus.OK);
         }
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/sub/paresImpares")
+    @PostMapping("/sub/inBitPerm")
     public  ResponseEntity<Map<String, List<Integer>>>  subInBitPerm (@RequestBody Map<String,String> requestBody){
 
         String input = requestBody.get("input");
@@ -757,8 +758,8 @@ public class R3RestController {
             switch (downCode){
                 case "inBitPerm(a[:len(a) // 2]), inBitPerm(a[len(a) // 2:])":
                     int mid = list.size() / 2;
-                     sol1 = invbitperm(list.subList(0, mid));
-                     sol2 = invbitperm(list.subList(mid, list.size()));
+                     sol1 =list.subList(0, mid);
+                     sol2 =list.subList(mid, list.size());
                     break;
                 case "paresImpares(a)":
                     List<List<Integer>> evensOdds = evensOdds(list);
