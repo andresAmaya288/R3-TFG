@@ -74,11 +74,11 @@ public class R3controller {
         return "register";
     }
 
-  
+
     @PostMapping ("/register")
     public String singUpConfirmation(Model model, @RequestBody @RequestParam String username, @RequestBody @RequestParam String password, HttpServletRequest request){
         User newUser = new User(username,password, "user");
-        newUser = this.dataService.addUser(newUser);
+        newUser = this.dataService.addUSr
         model.addAttribute("user",newUser);
         if (request.getUserPrincipal() != null){
             model.addAttribute("name", request.getUserPrincipal().getName());
