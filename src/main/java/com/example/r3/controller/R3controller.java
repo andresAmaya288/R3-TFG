@@ -1,6 +1,7 @@
 package com.example.r3.controller;
 
 import com.example.r3.model.services.DataService;
+import com.example.r3.model.services.ProblemLoader;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class R3controller {
         model.addAttribute("problems",this.dataService.getProblemValues());
         return "index";
     }
+
     @GetMapping("/problem/{id}")
     public String problem (Model model, HttpServletRequest request, @PathVariable String id){
         Long idLong = Long.parseLong(id);

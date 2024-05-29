@@ -1,4 +1,4 @@
-/*package com.example.r3.model.entities;
+package com.example.r3.model.entities;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -91,4 +91,4 @@ public class User {
     }
 
 
-}*/
+}

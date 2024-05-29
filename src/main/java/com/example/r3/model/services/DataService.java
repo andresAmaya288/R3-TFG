@@ -12,10 +12,10 @@ import java.util.List;
 public class DataService {
     @Autowired
     ProblemService problemService;
-    /*
+
     @Autowired
     UserService userService;
-    */
+
     public Problem getProblem(long id) {
         return this.problemService.getProblem(id);
     }
