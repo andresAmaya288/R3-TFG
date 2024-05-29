@@ -14,10 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -734,6 +731,54 @@ public class R3RestController {
     }
 
     ////////////////////////////////////////////////////////////////
+    @PostMapping("/sol/paresImpares")
+    public ResponseEntity<List<Integer>>  solInBitPerm(@RequestBody String input){
+        List<Integer> list = parseIntegerList(input);
+
+        if (list != null) {
+            return new ResponseEntity<>(invbitperm(list), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/sub/paresImpares")
+    public  ResponseEntity<Map<String, List<Integer>>>  subInBitPerm (@RequestBody Map<String,String> requestBody){
+
+        String input = requestBody.get("input");
+        String downCode = requestBody.get("downCode");
+
+        List<Integer> sol1  = new ArrayList<>();
+        List<Integer> sol2  = new ArrayList<>();
+        List<Integer> list  = parseIntegerList(input);
+        Map<String, List<Integer>> subpro = new HashMap<>();
+        boolean aux = true;
+        if(list != null){
+            switch (downCode){
+                case "inBitPerm(a[:len(a) // 2]), inBitPerm(a[len(a) // 2:])":
+                    int mid = list.size() / 2;
+                     sol1 = invbitperm(list.subList(0, mid));
+                     sol2 = invbitperm(list.subList(mid, list.size()));
+                    break;
+                case "paresImpares(a)":
+                    List<List<Integer>> evensOdds = evensOdds(list);
+                     sol1 = evensOdds.get(0);
+                     sol2 = evensOdds.get(1);
+                    break;
+                default:
+                    aux = false;
+                    break;
+            }
+            if (aux) {
+                subpro.put("sol1", sol1);
+                subpro.put("sol2", sol2);
+                return new ResponseEntity<>(subpro, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    ////////////////////////////////////////////////////////////////
 
     private static int[] parseIntegerArray(String input) {
         String[] numString = input.split(",");
@@ -766,4 +811,42 @@ public class R3RestController {
 
         return nums;
     }
+    public static List<List<Integer>> evensOdds(List<Integer> a) {
+        List<Integer> evens = new ArrayList<>();
+        List<Integer> odds = new ArrayList<>();
+        for (int i = 0; i < a.size(); i++) {
+            if (i % 2 == 0) {
+                evens.add(a.get(i));
+            } else {
+                odds.add(a.get(i));
+            }
+        }
+        return Arrays.asList(evens, odds);
+    }
+
+    public static List<Integer> interleave(List<Integer> a1, List<Integer> a2) {
+        if (a1.size() == 1) {
+            return Arrays.asList(a1.get(0), a2.get(0));
+        } else {
+            List<Integer> result = new ArrayList<>();
+            result.add(a1.get(0));
+            result.add(a2.get(0));
+            result.addAll(interleave(a1.subList(1, a1.size()), a2.subList(1, a2.size())));
+            return result;
+        }
+    }
+    private static List<Integer> invbitperm(List<Integer> a) {
+        if (a.size() <= 1) {
+            return new ArrayList<>(a);
+        } else {
+            List<List<Integer>> evensOdds = evensOdds(a);
+            List<Integer> evens = evensOdds.get(0);
+            List<Integer> odds = evensOdds.get(1);
+            List<Integer> result = new ArrayList<>();
+            result.addAll(invbitperm(evens));
+            result.addAll(invbitperm(odds));
+            return result;
+        }
+    }
+
 }

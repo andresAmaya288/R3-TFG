@@ -674,7 +674,7 @@ public class ProblemLoader {
         upCodes.add("inBitPerm(a1) + inBitPerm(a2)");
 
 
-        String title = "Permutación de Inversión de Bits";
+        String title = "Permutación de Inversión";
         String statement = "Desarrolla la función inBitPerm(a) que realice la permutación de inversión de bits en la lista de enteros a, utilizando las funciones paresImpares(a) para dividir la lista en índices pares e impares, e intercalar(a, b) para intercalar dos listas.";
         String args = "a";
         String function = "inBitPerm";

@@ -53,7 +53,7 @@ public class R3controller {
                 return "problemInterleave";
             case "Pares e Impares":
                 return "problemEvenOdds";
-            case "Permutación de Inversión de Bits":
+            case "Permutación de Inversión":
                 return "problemRevPerm";
             default:
                 return "problem";

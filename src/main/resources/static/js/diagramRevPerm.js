@@ -44,7 +44,7 @@ function getSolution(source,destiny1, destiny2) {
 
 }
 
-function getSubproblem(source, code, destiny, destiny2A,destiny2B) {
+function getSubproblem(source, code, destinyA, destinyB, destiny2A,destiny2B) {
     var downCode = document.getElementById(code).value;
     var input = document.getElementById(source).value;
     var url = document.getElementById("apiSubUrl").value;
@@ -72,19 +72,24 @@ function getSubproblem(source, code, destiny, destiny2A,destiny2B) {
         })
         .then(function (data) {
             console.log('Response body:', data);
-            document.getElementById(destiny).textContent = data;
 
-            var url2 = document.getElementById("apiSolUrl").value;
+            console.log('Response body:', data);
+
+            var valueA = data.sol1;
+            var valueB = data.sol2;
+
+            document.getElementById(destinyA).textContent = valueA;
+            document.getElementById(destinyB).textContent = valueB;
+
+
             var initialValue = document.getElementById(destiny).textContent;
-
-            var data2 = initialValue;
 
             var options2 = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: data2
+                body: JSON.stringify(data2)
             };
 
             fetch(url2, options2)
