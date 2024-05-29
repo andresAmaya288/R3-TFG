@@ -1,9 +1,17 @@
 package com.example.r3.model.services;
 
+import com.example.r3.model.entities.User;
+import com.example.r3.model.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 @Service
 public class UserService {
+    @Autowired
+    UserRepository userRepository;
+
     public Collection<User> getValues(){
         return this.userRepository.findAll();
     }
@@ -19,8 +27,8 @@ public class UserService {
 
     public boolean login (User user){
 
-        if(this.userRepository.existsById(user.getUserName())) {
-            return this.userRepository.findById(user.getUserName()).orElse(null).samePassword(user);
+        if(this.userRepository.existsById(user.getUsername())) {
+            return this.userRepository.findById(user.getUsername()).orElse(null).samePassword(user);
         }else{
             return false;
         }
@@ -35,7 +43,7 @@ public class UserService {
     }
 
     public User addUser (User user){
-        if(this.userRepository.existsById(user.getUserName())){
+        if(this.userRepository.existsById(user.getUsername())){
             return null;
         }else {
             this.userRepository.save(user);
@@ -45,10 +53,10 @@ public class UserService {
 
     public User deleteUser (User user) {
         User result;
-        if (!this.userRepository.existsById(user.getUserName())) {
+        if (!this.userRepository.existsById(user.getUsername())) {
             result = null;
         } else {
-            this.userRepository.deleteById(user.getUserName());
+            this.userRepository.deleteById(user.getUsername());
             result = user;
         }
         return result;

@@ -78,12 +78,11 @@ public class R3controller {
     @PostMapping ("/register")
     public String singUpConfirmation(Model model, @RequestBody @RequestParam String username, @RequestBody @RequestParam String password, HttpServletRequest request){
         User newUser = new User(username,password, "user");
-        newUser = this.dataService.addUSr
-        model.addAttribute("user",newUser);
+        newUser = this.dataService.addUser(newUser);
         if (request.getUserPrincipal() != null){
             model.addAttribute("name", request.getUserPrincipal().getName());
         }
-        return "sing_up_confirmation_template";
+        return "login";
     }
 
 
@@ -102,6 +101,7 @@ public class R3controller {
             problemLoader.addEvenOdds();
             problemLoader.addRevPerm();
             problemLoader.addMergeSort();
+            dataService.addUser(new User("a","a"));
             init = true;
         }
     }
