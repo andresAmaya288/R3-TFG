@@ -702,4 +702,81 @@ public class ProblemLoader {
         this.dataService.addProblem(newProblem);
     }
 
+    public void addMergeSort(){
+        List<BaseCondition> baseAnswer = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+
+
+        RecursiveCondition recSol = new RecursiveCondition("ordenar(a[:len(a) // 2]), ordenar(a[len(a) // 2:])", "mezclar(a1, a2)");
+        BaseCondition baseSol = new BaseCondition("len(a) < 2", "return a");
+
+
+        recursiveAnswer.add(recSol);
+        baseAnswer.add(baseSol);
+
+
+
+
+        Solution sol = new Solution(baseAnswer,recursiveAnswer);
+
+        List<Solution> sols = new ArrayList<>();
+        sols.add(sol);
+
+
+        List<String> operations = new ArrayList<>();
+        List<String> conditions = new ArrayList<>();
+        List<String> upCodes = new ArrayList<>();
+        List<String> downCodes = new ArrayList<>();
+
+        operations.add("return a");
+        operations.add("return a[0]");
+        operations.add("return a[2]");
+        operations.add("return a[1])");
+
+        conditions.add("len(a) < 1");
+        conditions.add("len(a) > 1");
+        conditions.add("len(a) < 2");
+        conditions.add("len(a) > 2");
+
+
+        downCodes.add("paresImpares(a)");
+        downCodes.add("ordenar(a[:len(a) // 2]), ordenar(a[len(a) // 2:])");
+
+        upCodes.add("mezclar(a1, a2)");
+        upCodes.add("ordenar(a1) + ordenar(a2)");
+
+
+        String title = "Ordenar";
+        String statement = "Desarrolla la función ordenar(a) que ordene la de enteros a, utilizando las funciones paresImpares(a) para dividir la lista en índices pares e impares, y mezclar(a, b) para mezclar dos listas.";
+        String args = "a";
+        String function = "ordenar";
+        String url = "/../img/Ordenar.png";
+        String extraFunction1 = "def mezclar(a, b):\n" +
+                "    if len(a) == 0:\n" +
+                "        return b\n" +
+                "    elif len(b) == 0:\n" +
+                "        return a\n" +
+                "    else:\n" +
+                "        if a[0] < b[0]:\n" +
+                "            return [a[0]] + mezclar(a[1:], b)\n" +
+                "        else:\n" +
+                "            return [b[0]] + mezclar(a, b[1:])";
+        String extrafuncion2 = "def paresImpares(a):\n" +
+                "    if len(a) == 1:\n" +
+                "        return (a[0], [])\n" +
+                "    elif len(a) == 0:\n" +
+                "        return ([], [])\n" +
+                "    else:\n" +
+                "        (a1,a2) = paresImpares(a[2:])\n" +
+                "        return ([a[0]] + a1, [a[1]] + a2)";;
+        int points = 800;
+        int difficulty = 4;
+
+
+
+        Problem newProblem = new Problem(title,statement,
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols,extraFunction1,extrafuncion2);
+        this.dataService.addProblem(newProblem);
+    }
+
 }

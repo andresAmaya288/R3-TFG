@@ -781,6 +781,56 @@ public class R3RestController {
 
     ////////////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////
+    @PostMapping("/sol/ordenar")
+    public ResponseEntity<List<Integer>>  solMergeSort(@RequestBody String input){
+        List<Integer> list = parseIntegerList(input);
+
+        if (list != null) {
+            Collections.sort(list);
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/sub/ordenar")
+    public  ResponseEntity<Map<String, List<Integer>>>  subMergeSort (@RequestBody Map<String,String> requestBody){
+        String input = requestBody.get("input");
+        String downCode = requestBody.get("downCode");
+
+        List<Integer> sol1  = new ArrayList<>();
+        List<Integer> sol2  = new ArrayList<>();
+        List<Integer> list  = parseIntegerList(input);
+        Map<String, List<Integer>> subpro = new HashMap<>();
+        boolean aux = true;
+        if(list != null){
+            switch (downCode){
+                case "ordenar(a[:len(a) // 2]), ordenar(a[len(a) // 2:])":
+                    int mid = list.size() / 2;
+                    sol1 =list.subList(0, mid);
+                    sol2 =list.subList(mid, list.size());
+                    break;
+                case "paresImpares(a)":
+                    List<List<Integer>> evensOdds = evensOdds(list);
+                    sol1 = evensOdds.get(0);
+                    sol2 = evensOdds.get(1);
+                    break;
+                default:
+                    aux = false;
+                    break;
+            }
+            if (aux) {
+                subpro.put("sol1", sol1);
+                subpro.put("sol2", sol2);
+                return new ResponseEntity<>(subpro, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    ////////////////////////////////////////////////////////////////
+
     private static int[] parseIntegerArray(String input) {
         String[] numString = input.split(",");
 
