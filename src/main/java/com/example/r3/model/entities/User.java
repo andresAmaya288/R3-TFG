@@ -70,8 +70,14 @@ public class User {
         if (password != null) {
             this.hashedPassword = passwordEncoder.encode(password);
         }
-        this.roles = List.of(roles);
     }
+    public User(String username, String password) {
+        this.username = username;
+        if (password != null) {
+            this.hashedPassword = passwordEncoder.encode(password);
+        }
+    }
+
 
     public Problem addProblem(Problem problem){
        Boolean foo = this.problemList.add(problem);
