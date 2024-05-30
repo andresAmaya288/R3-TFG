@@ -21,7 +21,7 @@ public class User {
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
     @Column(nullable = true)
     private String hashedPassword;
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH})
     private List<Problem> problemList  = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -38,8 +38,6 @@ public class User {
     public void setProblemList(List<Problem> problemList) {
         this.problemList = problemList;
     }
-
-
 
     public String getUsername() {
         return username;
@@ -80,8 +78,12 @@ public class User {
 
 
     public Problem addProblem(Problem problem){
-       Boolean foo = this.problemList.add(problem);
-       return foo?problem:null;
+        if(!this.problemList.contains(problem)) {
+            Boolean foo = this.problemList.add(problem);
+            return foo ? problem : null;
+        }else{
+            return problem;
+        }
     }
 
     public boolean samePassword(User user){
@@ -94,6 +96,14 @@ public class User {
 
     public List<String> getRoles() {
         return roles;
+    }
+
+    public int getScore() {
+        int score = 0;
+        for (Problem problem : this.problemList){
+            score += problem.getPoints();
+        }
+        return score;
     }
 
 

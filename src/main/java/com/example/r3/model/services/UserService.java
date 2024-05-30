@@ -1,7 +1,9 @@
 package com.example.r3.model.services;
 
+import com.example.r3.model.entities.Problem;
 import com.example.r3.model.entities.User;
 import com.example.r3.model.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,5 +77,16 @@ public class UserService {
 
     public User updateUser(User user){
         return this.userRepository.save(user);
+    }
+
+    @Transactional
+    public Problem solve(User user, Problem problem){
+        user = this.userRepository.findByUsername(user.getUsername()).orElse(null);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        user.addProblem(problem);
+        this.updateUser(user);
+        return problem;
     }
 }

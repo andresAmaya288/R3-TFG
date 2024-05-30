@@ -7,7 +7,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 
 @Service
 public class DataService {
@@ -88,8 +87,12 @@ public class DataService {
     }
 
     public User deleteUser (String username) {
-
         User deleted = this.UserService.deleteUser(username);
         return deleted;
+    }
+    //////////////////////////////////////////////
+
+    public Problem solve(User user, Problem problem){
+        return this.UserService.solve(user, problem);
     }
 }
