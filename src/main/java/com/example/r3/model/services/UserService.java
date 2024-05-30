@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -89,4 +92,10 @@ public class UserService {
         this.updateUser(user);
         return problem;
     }
+    public List<User> getUsersSortedByScore() {
+        return this.userRepository.findAll().stream()
+                .sorted(Comparator.comparingInt(User::getScore).reversed())
+                .collect(Collectors.toList());
+    }
+
 }

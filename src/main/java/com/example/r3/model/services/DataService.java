@@ -7,6 +7,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DataService {
@@ -94,5 +97,9 @@ public class DataService {
 
     public Problem solve(User user, Problem problem){
         return this.UserService.solve(user, problem);
+    }
+
+    public List<User> getUsersSortedByScore() {
+        return this.UserService.getUsersSortedByScore();
     }
 }

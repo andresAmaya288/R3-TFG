@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @NoArgsConstructor
 @Controller
@@ -33,6 +35,8 @@ public class R3controller {
     public String index (Model model, HttpServletRequest request){
         this.load();
         model.addAttribute("problems",this.dataService.getProblemValues());
+        model.addAttribute("currentU",request.getUserPrincipal());
+
         return "index";
     }
 
@@ -44,6 +48,7 @@ public class R3controller {
         Long idLong = Long.parseLong(id);
         model.addAttribute("problem",this.dataService.getProblem(idLong));
         model.addAttribute("problems",this.dataService.getProblemValues());
+        model.addAttribute("currentU",request.getUserPrincipal());
 
         switch (this.dataService.getProblem(idLong).getTitle()){
 
@@ -64,19 +69,26 @@ public class R3controller {
     public String login(Model model,HttpServletRequest request) {
         this.load();
         model.addAttribute("problems",this.dataService.getProblemValues());
+        model.addAttribute("currentU",request.getUserPrincipal());
+
         return "login";
     }
 
     @GetMapping("/register")
-    public String register(Model model) {
+    public String register(Model model,HttpServletRequest request) {
         this.load();
         model.addAttribute("problems",this.dataService.getProblemValues());
+        model.addAttribute("currentU",request.getUserPrincipal());
         return "register";
     }
 
 
     @PostMapping ("/register")
     public String singUpConfirmation(Model model, @RequestBody @RequestParam String username, @RequestBody @RequestParam String password, HttpServletRequest request){
+        this.load();
+        model.addAttribute("problems",this.dataService.getProblemValues());
+        model.addAttribute("currentU",request.getUserPrincipal());
+
         User newUser = new User(username,password, "user");
         newUser = this.dataService.addUser(newUser);
         if (request.getUserPrincipal() != null){
@@ -85,6 +97,16 @@ public class R3controller {
         return "login";
     }
 
+
+    @GetMapping("/ranking")
+    public String userList(Model model,HttpServletRequest request) {
+        this.load();
+        model.addAttribute("problems",this.dataService.getProblemValues());
+        model.addAttribute("currentU",request.getUserPrincipal());
+        List<User> users = this.dataService.getUsersSortedByScore();
+        model.addAttribute("users",users);
+        return "ranking";
+    }
 
     //////////////////////////////////////////////////////////////////////////////
     private void load (){

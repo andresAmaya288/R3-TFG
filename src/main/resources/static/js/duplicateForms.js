@@ -79,9 +79,9 @@ function duplicateRecursiveCase() {
     solutionClone.id = "solution" + recId;
 
     inputClone.value = "";
-    subproblemClone.textContent = "Subproblema";
-    subsolutionClone.textContent = "Subsolución";
-    solutionClone.textContent = "Solución";
+    subproblemClone.textContent = "Subpro";
+    subsolutionClone.textContent = "Subsol";
+    solutionClone.textContent = "Sol";
 
     var parentID;
 
