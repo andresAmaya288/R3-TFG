@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>R3 Ranking</title>
+    <title>R3 Mi zona</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
     <!-- Bootstrap icons-->
@@ -94,32 +94,47 @@
 <header class="bg-dark py-1">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h4 class="display-4 fw-bolder">Ranking</h4>
+            <h4 class="display-4 fw-bolder">Problemas Resueltos</h4>
         </div>
     </div>
 </header>
 <!-- Section-->
 <section class="py-5 content">
+    {{#currentU}}
     <div class="container px-4 px-lg-5 mt-5">
         <div class="table-wrapper">
             <table class="table table-hover table-striped">
                 <thead class="table-dark">
                 <tr>
-                    <th>Usuario</th>
+                    <th>Problema</th>
                     <th>Puntuación</th>
                 </tr>
                 </thead>
                 <tbody>
-                {{#users}}
+                {{#user}}
+                {{#problemList}}
                 <tr>
-                    <td>{{username}}</td>
+                    <td>{{title}}</td>
+                    <td>{{points}}</td>
+                </tr>
+                {{/problemList}}
+                <tr>
+                    <td>Total</td>
                     <td>{{score}}</td>
                 </tr>
-                {{/users}}
+                {{/user}}
                 </tbody>
             </table>
         </div>
     </div>
+    {{/currentU}}
+    {{^currentU}}
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center">
+            <h6 class="display-4 fw-bolder">Regístrate o Inicia sesión para ver tus problemas resueltos</h6>
+        </div>
+    </div>
+    {{/currentU}}
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">

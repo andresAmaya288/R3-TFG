@@ -108,6 +108,17 @@ public class R3controller {
         return "ranking";
     }
 
+    @GetMapping("/zone")
+    public String zone(Model model,HttpServletRequest request) {
+        this.load();
+        model.addAttribute("problems",this.dataService.getProblemValues());
+        model.addAttribute("currentU",request.getUserPrincipal());
+        if(request.getUserPrincipal() != null) {
+            model.addAttribute("user", this.dataService.getUser(request.getUserPrincipal().getName()));
+        }
+        return "userZone";
+    }
+
     //////////////////////////////////////////////////////////////////////////////
     private void load (){
         if(!init) {
