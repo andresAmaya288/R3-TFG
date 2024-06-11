@@ -82,10 +82,10 @@ def {{function}}({{args}}):
 </div>
 <div id="addRecursiveCase" style="display: none;">
     elif <a id="recConditionPyI">recConditionI</a>
-	    return <a id="upCodePyI">Operation_upI</a> <a id="downCodePyI">Operation_downI</a>
+	    return <a id="upCodePyI">Recursive_IntegrationI</a> <a id="downCodePyI">Descomposition_FunctionI</a>
 </div>
     else:
-       return <a id="upCodePy">Operation_up</a> <a id="downCodePy">Operation_down</a>
+       return <a id="upCodePy">Recursive_Integration</a> <a id="downCodePy">Descomposition_Function</a>
                                         </pre>
                     </div>
                 </footer>
@@ -149,7 +149,7 @@ def {{function}}({{args}}):
                                     <input type="text" id="inputA" name="inputA">
                                     <input type="text" id="inputB" name="inputB"><br><br>
 
-                                    <label class="form-label"  for="downCode">Operación (Abajo):</label>
+                                    <label class="form-label"  for="downCode">Función de Descomposición:</label>
                                     <select class="form-select" id="downCode" name="downCode">
                                         <option value="...">...</option>
                                         {{#downCodes}}
@@ -176,7 +176,7 @@ def {{function}}({{args}}):
                                     <label for="solution">Solución:</label><br>
                                     <div id="solution" style="margin-top: 4px;" class="card">Sol</div><br>
 
-                                    <label class="form-label"  for="upCode">Operación (Arriba):</label>
+                                    <label class="form-label"  for="upCode">Integración Recursiva:</label>
                                     <select class="form-select" id="upCode" name="upCode">
                                         <option value="...">...</option>
                                         {{#upCodes}}

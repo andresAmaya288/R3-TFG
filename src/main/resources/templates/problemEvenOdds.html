@@ -82,12 +82,12 @@ def {{function}}({{args}}):
 </div>
 <div id="addRecursiveCase" style="display: none;">
     elif <a id="recConditionPyI">recConditionI</a>
-        (a1,a2) = {{function}}(<a id="downCodePyI">Operation_downI</a>)
-	    return <a id="upCodePyI">Operation_upI</a>
+        (a1,a2) = {{function}}(<a id="downCodePyI">Descomposition_FunctionI</a>)
+	    return <a id="upCodePyI">Recursive_IntegrationI</a>
 </div>
     else:
-       (a1,a2) = {{function}}(<a id="downCodePy">Operation_down</a>)
-       return <a id="upCodePy">Operation_up</a>
+       (a1,a2) = {{function}}(<a id="downCodePy">Descomposition_Function</a>)
+       return <a id="upCodePy">Recursive_Integration</a>
                                         </pre>
                     </div>
                 </footer>
@@ -150,7 +150,7 @@ def {{function}}({{args}}):
                                     <label>Input:</label><br>
                                     <input type="text" id="input" name="input"><br><br><br>
 
-                                    <label class="form-label"  for="downCode">Operación (Abajo):</label>
+                                    <label class="form-label"  for="downCode">Función de Descomposición:</label>
                                     <select class="form-select" id="downCode" name="downCode">
                                         <option value="...">...</option>
                                         {{#downCodes}}
@@ -175,7 +175,7 @@ def {{function}}({{args}}):
                                     <div id="solution1" style="margin-top: 4px;" class="card">A1</div>
                                     <div id="solution2" style="margin-top: 4px;" class="card">A2</div><br>
 
-                                    <label class="form-label"  for="upCode">Operación (Arriba):</label>
+                                    <label class="form-label"  for="upCode">Integración Recursiva:</label>
                                     <select class="form-select" id="upCode" name="upCode">
                                         <option value="...">...</option>
                                         {{#upCodes}}
