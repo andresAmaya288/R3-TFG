@@ -691,7 +691,7 @@ public class ProblemLoader {
                 "        return ([], [])\n" +
                 "    else:\n" +
                 "        (a1,a2) = paresImpares(a[2:])\n" +
-                "        return ([a[0]] + a1, [a[1]] + a2)";;
+                "        return ([a[0]] + a1, [a[1]] + a2)";
         int points = 600;
         int difficulty = 3;
 
@@ -705,23 +705,28 @@ public class ProblemLoader {
     public void addMergeSort(){
         List<BaseCondition> baseAnswer = new ArrayList<>();
         List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
+        List<BaseCondition> baseAnswer2 = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
 
 
         RecursiveCondition recSol = new RecursiveCondition("ordenar(a[:len(a) // 2]), ordenar(a[len(a) // 2:])", "mezclar(a1, a2)");
         BaseCondition baseSol = new BaseCondition("len(a) < 2", "return a");
-
+        RecursiveCondition recSol2 = new RecursiveCondition("min(a), a[:a.index(min(a))] + a[a.index(min(a)) + 1:]", "a1 + ordenar(a2)");
+        BaseCondition baseSol2 = new BaseCondition("len(a) < 2", "return a");
 
         recursiveAnswer.add(recSol);
         baseAnswer.add(baseSol);
 
-
+        recursiveAnswer2.add(recSol2);
+        baseAnswer2.add(baseSol2);
 
 
         Solution sol = new Solution(baseAnswer,recursiveAnswer);
+        Solution sol2 = new Solution(baseAnswer2,recursiveAnswer2);
 
         List<Solution> sols = new ArrayList<>();
         sols.add(sol);
-
+        sols.add(sol2);
 
         List<String> operations = new ArrayList<>();
         List<String> conditions = new ArrayList<>();
@@ -733,6 +738,7 @@ public class ProblemLoader {
         operations.add("return a[2]");
         operations.add("return a[1])");
 
+
         conditions.add("len(a) < 1");
         conditions.add("len(a) > 1");
         conditions.add("len(a) < 2");
@@ -741,9 +747,12 @@ public class ProblemLoader {
 
         downCodes.add("paresImpares(a)");
         downCodes.add("ordenar(a[:len(a) // 2]), ordenar(a[len(a) // 2:])");
+        downCodes.add("min(a), a[:a.index(min(a))] + a[a.index(min(a)) + 1:]");
+
 
         upCodes.add("mezclar(a1, a2)");
         upCodes.add("ordenar(a1) + ordenar(a2)");
+        upCodes.add("a1 + ordenar(a2)");
 
 
         String title = "Ordenar";

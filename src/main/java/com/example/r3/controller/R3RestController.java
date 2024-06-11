@@ -817,6 +817,12 @@ public class R3RestController {
                     sol1 = evensOdds.get(0);
                     sol2 = evensOdds.get(1);
                     break;
+                case "min(a), a[:a.index(min(a))] + a[a.index(min(a)) + 1:]":
+                    int minElement = Collections.min(list);
+                    list.remove((Integer) minElement);
+                    sol1 = Collections.singletonList(minElement);
+                    sol2 = new ArrayList<>(list);
+                    break;
                 default:
                     aux = false;
                     break;
