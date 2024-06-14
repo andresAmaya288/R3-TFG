@@ -73,15 +73,11 @@
                     <div class="d-flex justify-content-between sticky-top sticky-bottom">
                         <div id="pythonCode" class="m-0 text-left text-white">
                             <pre>
-{{#extraFunction1}}
+{{#extraFunctions}}
 {{.}}
 
-{{/extraFunction1}}
-{{#extraFunction2}}
+{{/extraFunctions}}
 
-{{.}}
-
-{{/extraFunction2}}
 def {{function}}({{args}}):
     if <a id="conditionPy">Condition</a>:
         return <a id="operationPy">Operation</a>

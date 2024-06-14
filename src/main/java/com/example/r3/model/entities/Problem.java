@@ -21,8 +21,9 @@ public class Problem {
     String args;
     String urlImg;
 
-    String extraFunction1;
-    String extraFunction2;
+    @ElementCollection
+    List <String> extraFunctions;
+
     int points;
     int difficulty;
 
@@ -73,7 +74,7 @@ public class Problem {
     public Problem(String title, String statement, String function, String args, String urlImg,
                    int points, int difficulty, List<String> operations,
                    List<String> conditions, List<String> upCodes,
-                   List<String> downCodes, List<Solution> solutions,String extraFunction1, String extraFunction2) {
+                   List<String> downCodes, List<Solution> solutions, List <String> extraFuncions) {
         this.title = title;
         this.statement = statement;
         this.function = function;
@@ -88,8 +89,7 @@ public class Problem {
         this.solutions = solutions;
         this.emptyStars = new char [5 - difficulty];
         this.fullStars = new char [difficulty];
-        this.extraFunction1 = extraFunction1;
-        this.extraFunction2 = extraFunction2;
+        this.extraFunctions = extraFuncions;
     }
 
     public long getId() {
@@ -226,20 +226,12 @@ public class Problem {
         this.fullStars = fullStars;
     }
 
-    public String getExtraFunction1() {
-        return extraFunction1;
+    public List<String> getExtraFunctions() {
+        return extraFunctions;
     }
 
-    public void setExtraFunction1(String extraFunction1) {
-        this.extraFunction1 = extraFunction1;
-    }
-
-    public String getExtraFunction2() {
-        return extraFunction2;
-    }
-
-    public void setExtraFunction2(String extraFunction2) {
-        this.extraFunction2 = extraFunction2;
+    public void setExtraFunctions(List<String> extraFunctions) {
+        this.extraFunctions = extraFunctions;
     }
 
     public List<Solution> getSolutions() {

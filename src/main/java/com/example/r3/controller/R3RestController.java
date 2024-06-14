@@ -823,6 +823,18 @@ public class R3RestController {
                     sol1 = Collections.singletonList(minElement);
                     sol2 = new ArrayList<>(list);
                     break;
+                case "pivotar(a)":
+
+                    int pivot = list.get(list.size() / 2);
+                    list.remove(list.size() / 2);
+                    for (int i : list){
+                        if(i < pivot){
+                            sol1.add(i);
+                        }else{
+                            sol2.add(i);
+                        }
+                    }
+                    break;
                 default:
                     aux = false;
                     break;

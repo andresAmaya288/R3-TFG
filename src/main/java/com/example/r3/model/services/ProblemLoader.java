@@ -694,11 +694,13 @@ public class ProblemLoader {
                 "        return ([a[0]] + a1, [a[1]] + a2)";
         int points = 600;
         int difficulty = 3;
+        List <String> extraFunctions = new ArrayList<>();
+        extraFunctions.add(extraFunction1);
 
 
 
         Problem newProblem = new Problem(title,statement,
-                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols,extraFunction1,extrafuncion2);
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols,extraFunctions);
         this.dataService.addProblem(newProblem);
     }
 
@@ -707,12 +709,15 @@ public class ProblemLoader {
         List<RecursiveCondition> recursiveAnswer = new ArrayList<>();
         List<BaseCondition> baseAnswer2 = new ArrayList<>();
         List<RecursiveCondition> recursiveAnswer2 = new ArrayList<>();
-
+        List<BaseCondition> baseAnswer3 = new ArrayList<>();
+        List<RecursiveCondition> recursiveAnswer3 = new ArrayList<>();
 
         RecursiveCondition recSol = new RecursiveCondition("ordenar(a[:len(a) // 2]), ordenar(a[len(a) // 2:])", "mezclar(a1, a2)");
         BaseCondition baseSol = new BaseCondition("len(a) < 2", "return a");
         RecursiveCondition recSol2 = new RecursiveCondition("min(a), a[:a.index(min(a))] + a[a.index(min(a)) + 1:]", "a1 + ordenar(a2)");
         BaseCondition baseSol2 = new BaseCondition("len(a) < 2", "return a");
+        RecursiveCondition recSol3 = new RecursiveCondition("pivotar(a)", "ordenar(a1) + a[len(a) // 2] + ordenar(a2)");
+        BaseCondition baseSol3 = new BaseCondition("len(a) < 2", "return a");
 
         recursiveAnswer.add(recSol);
         baseAnswer.add(baseSol);
@@ -720,13 +725,18 @@ public class ProblemLoader {
         recursiveAnswer2.add(recSol2);
         baseAnswer2.add(baseSol2);
 
+        recursiveAnswer3.add(recSol3);
+        baseAnswer3.add(baseSol3);
+
 
         Solution sol = new Solution(baseAnswer,recursiveAnswer);
         Solution sol2 = new Solution(baseAnswer2,recursiveAnswer2);
+        Solution sol3 = new Solution(baseAnswer3,recursiveAnswer3);
 
         List<Solution> sols = new ArrayList<>();
         sols.add(sol);
         sols.add(sol2);
+        sols.add(sol3);
 
         List<String> operations = new ArrayList<>();
         List<String> conditions = new ArrayList<>();
@@ -748,11 +758,13 @@ public class ProblemLoader {
         downCodes.add("paresImpares(a)");
         downCodes.add("ordenar(a[:len(a) // 2]), ordenar(a[len(a) // 2:])");
         downCodes.add("min(a), a[:a.index(min(a))] + a[a.index(min(a)) + 1:]");
+        downCodes.add("pivotar(a)");
 
 
         upCodes.add("mezclar(a1, a2)");
         upCodes.add("ordenar(a1) + ordenar(a2)");
         upCodes.add("a1 + ordenar(a2)");
+        upCodes.add("ordenar(a1) + a[len(a) // 2] + ordenar(a2)");
 
 
         String title = "Ordenar";
@@ -770,21 +782,34 @@ public class ProblemLoader {
                 "            return [a[0]] + mezclar(a[1:], b)\n" +
                 "        else:\n" +
                 "            return [b[0]] + mezclar(a, b[1:])";
-        String extrafuncion2 = "def paresImpares(a):\n" +
+        String extraFunction2 = "def paresImpares(a):\n" +
                 "    if len(a) == 1:\n" +
                 "        return (a[0], [])\n" +
                 "    elif len(a) == 0:\n" +
                 "        return ([], [])\n" +
                 "    else:\n" +
                 "        (a1,a2) = paresImpares(a[2:])\n" +
-                "        return ([a[0]] + a1, [a[1]] + a2)";;
+                "        return ([a[0]] + a1, [a[1]] + a2)";
+        String extraFunction3 = "def pivotar(a):\n" +
+                "    if len(a) == 0:\n" +
+                "        return [], []\n" +
+                "    else:\n" +
+                "        mid_index = len(a) // 2\n" +
+                "        pivot_value = a[mid_index]\n" +
+                "        a1 = [x for x in a if x < pivot_value]\n" +
+                "        a2 = [x for x in a if x > pivot_value]\n" +
+                "        return a1, a2";
+
         int points = 800;
         int difficulty = 4;
-
+        List <String> extraFunctions = new ArrayList<>();
+        extraFunctions.add(extraFunction1);
+        extraFunctions.add(extraFunction2);
+        extraFunctions.add(extraFunction3);
 
 
         Problem newProblem = new Problem(title,statement,
-                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols,extraFunction1,extrafuncion2);
+                function,args,url, points,difficulty,operations, conditions, upCodes, downCodes, sols,extraFunctions);
         this.dataService.addProblem(newProblem);
     }
 
