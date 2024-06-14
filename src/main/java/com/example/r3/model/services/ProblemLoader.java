@@ -794,10 +794,10 @@ public class ProblemLoader {
                 "    if len(a) == 0:\n" +
                 "        return [], []\n" +
                 "    else:\n" +
-                "        mid_index = len(a) // 2\n" +
-                "        pivot_value = a[mid_index]\n" +
-                "        a1 = [x for x in a if x < pivot_value]\n" +
-                "        a2 = [x for x in a if x > pivot_value]\n" +
+                "        mitad = len(a) // 2\n" +
+                "        pivote = a[mitad]\n" +
+                "        a1 = [x for x in a if x < pivote]\n" +
+                "        a2 = [x for x in a if x > pivote]\n" +
                 "        return a1, a2";
 
         int points = 800;
