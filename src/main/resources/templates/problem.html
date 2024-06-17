@@ -227,11 +227,11 @@ def {{function}}({{args}}):
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
 <script>
     function copyToClipboard() {
-        const code = document.querySelector("#pythonCode pre code").innerText;
+        const code = document.querySelector("#pythonCode").innerText;
         navigator.clipboard.writeText(code).then(() => {
-            alert("Código copiado al portapapeles");
+            console.log("Código copiado al portapapeles");
         }, () => {
-            alert("Error al copiar el código");
+            console.log("Error al copiar el código");
         });
     }
 </script>
