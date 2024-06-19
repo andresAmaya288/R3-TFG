@@ -45,11 +45,6 @@ public class Problem {
 
 
 
-    /*
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
-    private List<User> userList  = new ArrayList<>();
-    */
-
     public Problem(String title, String statement, String function, String args, String urlImg,
                    int points, int difficulty, List<String> operations,
                    List<String> conditions, List<String> upCodes,
@@ -117,15 +112,6 @@ public class Problem {
     }
 
 
-    /*
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
-    */
     public int getDifficulty() {
         return difficulty;
     }
