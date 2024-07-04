@@ -377,7 +377,7 @@ public class R3RestController {
     ////////////////////////////////////////////////////////////////
 
     @PostMapping("/sol/contieneDigit")
-    public ResponseEntity<Boolean> solDigit (@RequestBody String input){
+    public ResponseEntity<Integer> solDigit (@RequestBody String input){
         int [] array = parseIntegerArray(input);
         if(array != null){
             if (array.length == 2){
@@ -393,7 +393,8 @@ public class R3RestController {
 
                         n /= 10;
                     }
-                    return new ResponseEntity<>(aux, HttpStatus.OK);
+
+                    return new ResponseEntity<>(aux?1:0, HttpStatus.OK);
                 }
             }
         }
